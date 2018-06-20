@@ -13,6 +13,12 @@ const TEST_OUTPUT_DESCRIPTIONS = [
 ]
 
 export default class App extends Component {
+  onPayment (data) {
+    console.log(
+      `react-money-button/example: You clicked the money button and received a postMessage response: ${data}`
+    )
+  }
+
   render () {
     return (
       <div>
@@ -21,7 +27,10 @@ export default class App extends Component {
         </header>
         <section>
           <p>This is how the button looks when rendered:</p>
-          <MoneyButton outputDescriptions={TEST_OUTPUT_DESCRIPTIONS} />
+          <MoneyButton
+            outputDescriptions={TEST_OUTPUT_DESCRIPTIONS}
+            onPayment={this.onPayment.bind(this)}
+          />
         </section>
       </div>
     )
