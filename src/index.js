@@ -6,11 +6,26 @@ import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import React, { Component } from 'react'
 
-import styles from './styles.css'
+import './styles.css'
 
-const IFRAME_URL = 'http://localhost:3000/v2'
+const IFRAME_URL = 'http://localhost:3000/iframe/v2'
 
 export default class MoneyButton extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      iframeSource: null
+    }
+  }
+
+  componentDidMount () {
+    let { outputDescriptions } = this.props
+    let iframeSource = `${IFRAME_URL}?${queryString.stringify({
+      outputDescriptions: JSON.stringify(outputDescriptions)
+    })}`
+    this.setState({ iframeSource })
+  }
+
   onClick () {
     // TODO: Support postMessage API to get responses from the button such as click
     // Note that we need to rely on the webhook most of the time for security,
@@ -19,11 +34,8 @@ export default class MoneyButton extends Component {
   }
 
   render () {
-    let { outputDescriptions } = this.props
-    let iframeSource = `${IFRAME_URL}?${queryString.stringify({
-      outputDescriptions: JSON.stringify(outputDescriptions)
-    })}`
-    return (
+    let { iframeSource } = this.state
+    return iframeSource !== null ? (
       <iframe
         src={iframeSource}
         width='100px'
@@ -31,7 +43,7 @@ export default class MoneyButton extends Component {
         scrolling='no'
         style={{ border: 'none' }}
       />
-    )
+    ) : null
   }
 }
 
