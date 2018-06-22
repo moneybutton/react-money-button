@@ -21,9 +21,9 @@ export default class MoneyButton extends Component {
   }
 
   componentDidMount () {
-    let { outputDescriptions } = this.props
+    let { paymentOutputs } = this.props
     let iframeSource = `${IFRAME_URL}?${queryString.stringify({
-      outputDescriptions: JSON.stringify(outputDescriptions)
+      paymentOutputs: JSON.stringify(paymentOutputs)
     })}`
     this.setState({ iframeSource })
 
@@ -94,5 +94,5 @@ export default class MoneyButton extends Component {
 }
 
 MoneyButton.propTypes = {
-  outputDescriptions: PropTypes.any.isRequired
+  paymentOutputs: PropTypes.any.isRequired
 }

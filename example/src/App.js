@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 // Private key: KwfHwGrVWomkSAgmsQCt4XeG8JSjzMCc2goyeq9FYdLRSLE3kcCo
 const TEST_ADDRESS = 'bchtest:qrkmjmfamfdqs5qvadkyrz72v42jk99pvspv4cepp3'
 const TEST_AMOUNT_SATOSHIS = 1000
-const TEST_OUTPUT_DESCRIPTIONS = [
+const TEST_PAYMENT_OUTPUTS = [
   {
     type: 'address',
     address: TEST_ADDRESS,
@@ -28,7 +28,7 @@ export default class App extends Component {
         <section>
           <p>This is how the button looks when rendered:</p>
           <MoneyButton
-            outputDescriptions={TEST_OUTPUT_DESCRIPTIONS}
+            paymentOutputs={TEST_PAYMENT_OUTPUTS}
             onPayment={this.onPayment.bind(this)}
           />
         </section>
