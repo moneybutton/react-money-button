@@ -13,12 +13,14 @@ const TEST_PAYMENT_OUTPUTS = [
 ]
 
 export default class App extends Component {
-  onPayment (data) {
+  onPayment (payment) {
     console.log(
-      `react-money-button/example: You clicked the money button and received a postMessage response: ${data}`
+      `react-money-button/example: You clicked the money button and received a postMessage response: ${payment}`
     )
   }
-
+  onError (err) {
+    console.log('Error', err)
+  }
   render () {
     return (
       <div>
@@ -28,8 +30,22 @@ export default class App extends Component {
         <section>
           <p>This is how the button looks when rendered:</p>
           <MoneyButton
-            paymentOutputs={TEST_PAYMENT_OUTPUTS}
+            outputs={TEST_PAYMENT_OUTPUTS}
             onPayment={this.onPayment.bind(this)}
+            onError={this.onError.bind(this)}
+            to='bchtest:qz2dcdn8knkadgz8fjgue8c5la7pshggt5c4e3swsk'
+            type='tip'
+            amount='1000'
+            currency='BCH'
+            opReturn='yours.org'
+            ownerId='1'
+            buttonId='93434523234'
+            buttonData='somedata'
+            size='sm'
+            color='light'
+            hideAmount={false}
+            dropdown
+            dev
           />
         </section>
       </div>

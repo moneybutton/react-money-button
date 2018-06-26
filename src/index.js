@@ -9,6 +9,8 @@ import React, { Component } from 'react'
 import './styles.css'
 
 const IFRAME_ORIGIN = 'http://localhost:3000'
+// const IFRAME_ORIGIN = 'https://moneybutton.com'
+// const IFRAME_ORIGIN = process.env.MONEY_BUTTON_IFRAME_ORIGIN
 const IFRAME_URL = `${IFRAME_ORIGIN}/iframe/v2`
 
 export default class MoneyButton extends Component {
@@ -21,11 +23,41 @@ export default class MoneyButton extends Component {
   }
 
   componentDidMount () {
-    let { paymentOutputs } = this.props
-    let iframeSource = `${IFRAME_URL}?${queryString.stringify({
-      paymentOutputs: JSON.stringify(paymentOutputs)
+    const {
+      outputs,
+      to,
+      type,
+      amount,
+      currency,
+      opReturn,
+      ownerId,
+      buttonId,
+      buttonData,
+      size,
+      color,
+      hideAmount,
+      dropdown
+    } = this.props
+    const iframeSource = `${IFRAME_URL}?${queryString.stringify({
+      outputs: JSON.stringify(outputs),
+      to,
+      t: type,
+      amt: amount,
+      ccy: currency,
+      opd: opReturn,
+      oid: ownerId,
+      bid: buttonId,
+      bdt: buttonData
     })}`
     this.setState({ iframeSource })
+    // TODO: Connect remaining props
+    console.log(
+      'TODO: Connect props: size, color, hideAmount, dropdown',
+      size,
+      color,
+      hideAmount,
+      dropdown
+    )
 
     // Useful information about iframes in react:
     // https://medium.com/@ebakhtarov/handling-of-iframes-in-react-f038be46ac24
@@ -41,11 +73,11 @@ export default class MoneyButton extends Component {
       // We've received a message from an iframe other than the one that we
       // rendered. Do nothing. TODO: Remove the log in production. This is only
       // here for debugging purposes.
-      console.log(
-        `react-money-button: postMessage: wrong iframe: ${
-          event.source
-        } should be ${this.iframeDOMComponent.contentWindow}`
-      )
+      // console.log(
+      //   `react-money-button: postMessage: wrong iframe: ${
+      //     event.source
+      //   } should be ${this.iframeDOMComponent.contentWindow}`
+      // )
       return
     }
     if (event.origin !== IFRAME_ORIGIN) {
@@ -59,10 +91,12 @@ export default class MoneyButton extends Component {
       )
       return
     }
-    if (this.props.onPayment) {
-      console.log(`react-money-button: event.data: ${event.data}`)
-      // this.props.onPayment(event)
-      this.props.onPayment(event.data)
+    console.log(`react-money-button: event.data:`, event.data)
+    const { onError, onPayment } = this.props
+    if (event.data.error) {
+      onError && onError(new Error(event.data.error))
+    } else {
+      onPayment && onPayment(event.data.payment)
     }
   }
 
@@ -94,5 +128,19 @@ export default class MoneyButton extends Component {
 }
 
 MoneyButton.propTypes = {
-  paymentOutputs: PropTypes.any.isRequired
+  to: PropTypes.string,
+  type: PropTypes.string,
+  amount: PropTypes.string,
+  currency: PropTypes.string,
+  opReturn: PropTypes.string,
+  ownerId: PropTypes.string,
+  buttonId: PropTypes.string,
+  buttonData: PropTypes.string,
+  onPayment: PropTypes.func,
+  onError: PropTypes.func,
+  size: PropTypes.string,
+  color: PropTypes.string,
+  hideAmount: PropTypes.bool,
+  dropdown: PropTypes.bool,
+  outputs: PropTypes.array
 }
