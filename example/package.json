@@ -13,9 +13,11 @@
     "react-scripts": "^1.1.1"
   },
   "scripts": {
-    "start": "PORT=5050 react-scripts start",
+    "start":
+      "PORT=$MONEY_BUTTON_REACT_MONEY_BUTTON_EXAMPLE_PORT react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "REACT_APP_ENV=dev BROWSER=none yarn start"
   }
 }

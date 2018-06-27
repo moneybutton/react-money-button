@@ -11,13 +11,13 @@
   "scripts": {
     "test": "CI=1 react-scripts test --env=jsdom",
     "build": "rollup -c",
-    "start": "nodemon -w package.json -w src/ -x yarn build",
-    "start:example": "cd example && yarn start",
+    "build:watch": "nodemon -w package.json -w src/ -x yarn build",
     "prepublish": "npm run build",
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build",
     "dev":
-      "concurrently --names 'react-money-button,react-money-button-example' 'yarn start' 'yarn start:example'"
+      "concurrently --names 'react-money-button,react-money-button-example' 'yarn build:watch' 'yarn dev:example'",
+    "dev:example": "cd example && yarn dev"
   },
   "dependencies": {
     "create-react-library": "^2.1.0",
