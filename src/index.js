@@ -118,7 +118,7 @@ export default class MoneyButton extends Component {
       <iframe
         ref={f => (this.iframeDOMComponent = f)}
         src={iframeSource}
-        width='100px'
+        width='200px'
         height='40px'
         scrolling='no'
         style={{ border: 'none' }}
