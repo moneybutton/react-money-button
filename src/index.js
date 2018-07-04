@@ -16,6 +16,7 @@ const IFRAME_URL = `${IFRAME_ORIGIN}/iframe/v2`
 export default class MoneyButton extends Component {
   constructor (props) {
     super(props)
+    this.handlePostMessage = this.handlePostMessage.bind(this)
     this.iframeDOMComponent = null // the iframe DOM component will be set on mount
     this.state = {
       iframeSource: null
@@ -61,15 +62,18 @@ export default class MoneyButton extends Component {
 
     // Useful information about iframes in react:
     // https://medium.com/@ebakhtarov/handling-of-iframes-in-react-f038be46ac24
-    window.addEventListener('message', this.handlePostMessage.bind(this))
+    window.addEventListener('message', this.handlePostMessage, false)
   }
 
   componentWillUnmount () {
-    window.removeEventListener('message')
+    window.removeEventListener('message', this.handlePostMessage, false)
   }
 
   handlePostMessage (event) {
-    if (event.source !== this.iframeDOMComponent.contentWindow) {
+    if (
+      !this.iframeDOMComponent ||
+      event.source !== this.iframeDOMComponent.contentWindow
+    ) {
       // We've received a message from an iframe other than the one that we
       // rendered. Do nothing. TODO: Remove the log in production. This is only
       // here for debugging purposes.
