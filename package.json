@@ -9,14 +9,15 @@
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {
+    "lint": "standard --parser=babel-eslint",
+    "pretest": "yarn lint",
     "test": "CI=1 react-scripts test --env=jsdom",
     "build": "rollup -c",
     "build:watch": "nodemon -w package.json -w src/ -x yarn build",
     "prepublish": "npm run build",
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build",
-    "dev":
-      "concurrently --names 'react-money-button,react-money-button-example' 'yarn build:watch' 'yarn dev:example'",
+    "dev": "concurrently --names 'react-money-button,react-money-button-example' 'yarn build:watch' 'yarn dev:example'",
     "dev:example": "cd example && yarn dev"
   },
   "dependencies": {
@@ -30,7 +31,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-eslint": "^8.2.1",
+    "babel-eslint": "8.2.5",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
@@ -55,7 +56,22 @@
     "rollup-plugin-node-resolve": "^3.0.2",
     "rollup-plugin-peer-deps-external": "^2.0.0",
     "rollup-plugin-postcss": "^1.1.0",
-    "rollup-plugin-url": "^1.3.0"
+    "rollup-plugin-url": "^1.3.0",
+    "standard": "11.0.1"
   },
-  "files": ["dist"]
+  "files": [
+    "dist"
+  ],
+  "standard": {
+    "globals": [
+      "afterEach",
+      "beforeEach",
+      "describe",
+      "it",
+      "expect"
+    ],
+    "ignore": [
+      "static/moneybutton.js"
+    ]
+  }
 }
