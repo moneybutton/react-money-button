@@ -4,6 +4,7 @@
 
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
+import Popup from './popup'
 import React, { Component } from 'react'
 
 import './styles.css'
@@ -19,7 +20,12 @@ export default class MoneyButton extends Component {
     this.handlePostMessage = this.handlePostMessage.bind(this)
     this.iframeDOMComponent = null // the iframe DOM component will be set on mount
     this.state = {
-      iframeSource: null
+      iframeSource: null,
+      popup: null,
+      size: {
+        width: '200px',
+        height: '50px'
+      }
     }
   }
 
@@ -69,6 +75,10 @@ export default class MoneyButton extends Component {
     window.removeEventListener('message', this.handlePostMessage, false)
   }
 
+  showPopup (popup) {
+    this.setState({ popup })
+  }
+
   handlePostMessage (event) {
     if (
       !this.iframeDOMComponent ||
@@ -97,37 +107,49 @@ export default class MoneyButton extends Component {
     }
     console.log(`react-money-button: event.data:`, event.data)
     const { onError, onPayment } = this.props
-    if (event.data.error) {
-      onError && onError(new Error(event.data.error))
-    } else {
-      onPayment && onPayment(event.data.payment)
+    const { error, size, payment } = event.data
+    if (error) {
+      if (error === 'not logged in') {
+        this.showPopup(error)
+      }
+      onError && onError(new Error(error))
+    } else if (size) {
+      this.setState({ size })
+    } else if (payment) {
+      onPayment && onPayment(payment)
     }
   }
 
-  shouldComponentUpdate () {
-    // Guarantee the iframe won't be reloaded even if props or state changes.
-    // That is because we don't want to reload the page in the iframe. If for
-    // some reason in the future we want props or state to cause a reload, we
-    // will need to add some more sophisticated logic here rather than always
-    // returning false.
-    if (this.state.iframeSource) {
-      return false
-    }
-    return true
-  }
+  // shouldComponentUpdate (nextProps, nextState) {
+  //   // Guarantee the iframe won't be reloaded even if props or state changes.
+  //   // That is because we don't want to reload the page in the iframe. If for
+  //   // some reason in the future we want props or state to cause a reload, we
+  //   // will need to add some more sophisticated logic here rather than always
+  //   // returning false.
+  //   if (this.state.iframeSource) {
+  //     return false
+  //   }
+  //   return true
+  // }
 
   render () {
-    let { iframeSource } = this.state
-    return iframeSource !== null ? (
-      <iframe
-        ref={f => (this.iframeDOMComponent = f)}
-        src={iframeSource}
-        width='200px'
-        height='40px'
-        scrolling='no'
-        style={{ border: 'none' }}
-      />
-    ) : null
+    const { iframeSource, popup, size: { width, height } } = this.state
+    if (!iframeSource) return null
+    return (
+      <div
+        style={{ position: 'relative', display: 'inline-block', width, height }}
+      >
+        <Popup message={popup} onClick={() => this.setState({ popup: null })} />
+        <iframe
+          ref={f => (this.iframeDOMComponent = f)}
+          src={iframeSource}
+          width={width}
+          height={height}
+          scrolling='no'
+          style={{ border: 'none' }}
+        />
+      </div>
+    )
   }
 }
 
