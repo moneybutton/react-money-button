@@ -23,7 +23,7 @@ export default class MoneyButton extends Component {
       iframeSource: null,
       popup: null,
       size: {
-        width: '200px',
+        width: '280px',
         height: '50px'
       }
     }
@@ -137,7 +137,7 @@ export default class MoneyButton extends Component {
     if (!iframeSource) return null
     return (
       <div
-        style={{ position: 'relative', display: 'inline-block', width, height }}
+        style={{ position: 'relative', display: 'inline-block', width, height, marginTop: '200px' }}
       >
         <Popup message={popup} onClick={() => this.setState({ popup: null })} />
         <iframe
