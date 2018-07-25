@@ -85,7 +85,7 @@ const Popup = ({ message, onClick }) => {
         }
 
         .button.red {
-          background-color: #E54D3F;
+          background-color: #e54d3f;
         }
 
         .button.red:hover {
@@ -93,14 +93,13 @@ const Popup = ({ message, onClick }) => {
         }
 
         .button.nofill {
-          border: 1px solid #FFF;
+          border: 1px solid #fff;
         }
 
         .button.nofill:hover {
           color: #191927;
           background-color: white;
         }
-
       `}</style>
     </div>
   )
