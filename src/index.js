@@ -9,9 +9,7 @@ import React, { Component } from 'react'
 
 import './styles.css'
 
-const IFRAME_ORIGIN = 'http://localhost:3000'
-// const IFRAME_ORIGIN = 'https://moneybutton.com'
-// const IFRAME_ORIGIN = process.env.MONEY_BUTTON_IFRAME_ORIGIN
+const IFRAME_ORIGIN = process.env.REACT_APP_MONEY_BUTTON_WEBAPP_IFRAME_URI
 const IFRAME_URL = `${IFRAME_ORIGIN}/iframe/v2`
 
 export default class MoneyButton extends Component {

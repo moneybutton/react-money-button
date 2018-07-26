@@ -18,6 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "dev": "REACT_APP_ENV=dev BROWSER=none yarn start"
+    "dev":
+      "REACT_APP_ENV=dev REACT_APP_MONEY_BUTTON_WEBAPP_IFRAME_URI=$MONEY_BUTTON_WEBAPP_IFRAME_URI BROWSER=none yarn start"
   }
 }
