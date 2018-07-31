@@ -11,13 +11,15 @@
   "scripts": {
     "lint": "standard --parser=babel-eslint",
     "pretest": "yarn lint",
-    "test": "CI=1 react-scripts test --env=jsdom",
+    "test": "NODE_ENV=test CI=1 dotenv -e ../../.env.test -- react-scripts test --env=jsdom",
     "build": "rollup -c",
+    "build:dev": "NODE_ENV=dev dotenv -e ../../.env.dev -- yarn build",
+    "build:prod": "NODE_ENV=prod dotenv -e ../../.env.prod -- yarn build",
     "build:watch": "nodemon -w package.json -w src/ -x yarn build",
     "prepublish": "npm run build",
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build",
-    "dev": "concurrently --names 'react-money-button,react-money-button-example' 'yarn build:watch' 'yarn dev:example'",
+    "dev": "NODE_ENV=dev dotenv -e ../../.env.dev -- concurrently --names 'react-money-button,react-money-button-example' 'yarn build:watch' 'yarn dev:example'",
     "dev:example": "cd example && yarn dev"
   },
   "dependencies": {
@@ -37,6 +39,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "concurrently": "3.5.1",
+    "dotenv-cli": "1.4.0",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
     "eslint-config-standard-react": "^6.0.0",
