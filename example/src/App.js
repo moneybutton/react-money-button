@@ -33,10 +33,10 @@ export default class App extends Component {
             outputs={TEST_PAYMENT_OUTPUTS}
             onPayment={this.onPayment.bind(this)}
             onError={this.onError.bind(this)}
-            to='bchtest:qz2dcdn8knkadgz8fjgue8c5la7pshggt5c4e3swsk'
+            to='bchtest:qz06hcns03nhwarcpwugvqwuu5jqawd7rg94fgqfuv'
             type='tip'
             amount='1000'
-            currency='BCH'
+            currency='BCH-SAT'
             opReturn='yours.org'
             ownerId='1'
             buttonId='93434523234'
