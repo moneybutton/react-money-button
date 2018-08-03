@@ -30,22 +30,19 @@ export default class App extends Component {
         <section>
           <p>This is how the button looks when rendered:</p>
           <MoneyButton
-            outputs={TEST_PAYMENT_OUTPUTS}
-            onPayment={this.onPayment.bind(this)}
-            onError={this.onError.bind(this)}
-            to='bchtest:qz06hcns03nhwarcpwugvqwuu5jqawd7rg94fgqfuv'
-            type='tip'
+            to='bchtest:qz2dcdn8knkadgz8fjgue8c5la7pshggt5c4e3swsk'
             amount='1000'
             currency='BCH-SAT'
+            label='Leave a tip!'
+            hideAmount={false}
             opReturn='yours.org'
-            ownerId='1'
+            outputs={TEST_PAYMENT_OUTPUTS}
+            clientIdentifier='1'
             buttonId='93434523234'
             buttonData='somedata'
-            size='sm'
-            color='light'
-            hideAmount={false}
-            dropdown
-            dev
+            type='tip'
+            onPayment={this.onPayment.bind(this)}
+            onError={this.onError.bind(this)}
           />
         </section>
       </div>

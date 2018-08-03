@@ -30,39 +30,36 @@ export default class MoneyButton extends Component {
 
   componentDidMount () {
     const {
-      outputs,
       to,
-      type,
       amount,
       currency,
+      label,
+      hideAmount,
       opReturn,
-      ownerId,
+      outputs,
+      clientIdentifier,
       buttonId,
       buttonData,
-      size,
-      color,
-      hideAmount,
-      dropdown
+      type
     } = this.props
     const iframeSource = `${IFRAME_URL}?${queryString.stringify({
-      outputs: JSON.stringify(outputs),
       to,
-      t: type,
       amt: amount,
       ccy: currency,
+      lbl: label,
+      hamt: hideAmount,
       opd: opReturn,
-      oid: ownerId,
+      outputs: JSON.stringify(outputs),
+      cid: clientIdentifier,
       bid: buttonId,
-      bdt: buttonData
+      bdt: buttonData,
+      t: type
     })}`
     this.setState({ iframeSource })
     // TODO: Connect remaining props
     console.log(
-      'TODO: Connect props: size, color, hideAmount, dropdown',
-      size,
-      color,
-      hideAmount,
-      dropdown
+      'TODO: Connect props: hideAmount',
+      hideAmount
     )
 
     // Useful information about iframes in react:
@@ -160,18 +157,16 @@ export default class MoneyButton extends Component {
 
 MoneyButton.propTypes = {
   to: PropTypes.string,
-  type: PropTypes.string,
   amount: PropTypes.string,
   currency: PropTypes.string,
+  label: PropTypes.string,
+  hideAmount: PropTypes.bool,
   opReturn: PropTypes.string,
-  ownerId: PropTypes.string,
+  outputs: PropTypes.array,
+  clientIdentifier: PropTypes.string,
   buttonId: PropTypes.string,
   buttonData: PropTypes.string,
+  type: PropTypes.string,
   onPayment: PropTypes.func,
-  onError: PropTypes.func,
-  size: PropTypes.string,
-  color: PropTypes.string,
-  hideAmount: PropTypes.bool,
-  dropdown: PropTypes.bool,
-  outputs: PropTypes.array
+  onError: PropTypes.func
 }
