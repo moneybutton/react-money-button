@@ -11,15 +11,17 @@
   "scripts": {
     "lint": "standard --parser=babel-eslint",
     "pretest": "yarn lint",
-    "test": "NODE_ENV=test CI=1 dotenv -e ../../.env.test -- react-scripts test --env=jsdom",
+    "test":
+      "NODE_ENV=test CI=1 dotenv -e ../../.env.test -- react-scripts test --env=jsdom",
     "build": "rollup -c",
     "build:dev": "NODE_ENV=dev dotenv -e ../../.env.dev -- yarn build",
-    "build:prod": "NODE_ENV=prod dotenv -e ../../.env.prod -- yarn build",
+    "build:prod": "NODE_ENV=production dotenv -e ../../.env.prod -- yarn build",
     "build:watch": "nodemon -w package.json -w src/ -x yarn build",
     "prepublish": "npm run build",
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build",
-    "dev": "NODE_ENV=dev dotenv -e ../../.env.dev -- concurrently --names 'react-money-button,react-money-button-example' 'yarn build:watch' 'yarn dev:example'",
+    "dev":
+      "NODE_ENV=dev dotenv -e ../../.env.dev -- concurrently --names 'react-money-button,react-money-button-example' 'yarn build:watch' 'yarn dev:example'",
     "dev:example": "cd example && yarn dev"
   },
   "dependencies": {
@@ -62,19 +64,9 @@
     "rollup-plugin-url": "^1.3.0",
     "standard": "11.0.1"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "standard": {
-    "globals": [
-      "afterEach",
-      "beforeEach",
-      "describe",
-      "it",
-      "expect"
-    ],
-    "ignore": [
-      "static/moneybutton.js"
-    ]
+    "globals": ["afterEach", "beforeEach", "describe", "it", "expect"],
+    "ignore": ["static/moneybutton.js"]
   }
 }
