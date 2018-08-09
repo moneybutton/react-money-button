@@ -40,7 +40,8 @@ export default class MoneyButton extends Component {
       clientIdentifier,
       buttonId,
       buttonData,
-      type
+      type,
+      devMode
     } = this.props
     const iframeSource = `${IFRAME_URL}?${queryString.stringify({
       to,
@@ -53,7 +54,8 @@ export default class MoneyButton extends Component {
       cid: clientIdentifier,
       bid: buttonId,
       bdt: buttonData,
-      t: type
+      t: type,
+      dev: devMode
     })}`
     this.setState({ iframeSource })
     // TODO: Connect remaining props
@@ -137,8 +139,7 @@ export default class MoneyButton extends Component {
           position: 'relative',
           display: 'inline-block',
           width,
-          height,
-          marginTop: '200px'
+          height
         }}
       >
         <Popup message={popup} onClick={() => this.setState({ popup: null })} />
@@ -168,5 +169,6 @@ MoneyButton.propTypes = {
   buttonData: PropTypes.string,
   type: PropTypes.string,
   onPayment: PropTypes.func,
-  onError: PropTypes.func
+  onError: PropTypes.func,
+  devMode: PropTypes.bool
 }
