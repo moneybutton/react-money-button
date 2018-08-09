@@ -107,6 +107,9 @@ export default class MoneyButton extends Component {
       if (error === 'not logged in') {
         this.showPopup(error)
       }
+      if (error === 'insufficient balance') {
+        this.showPopup(error)
+      }
       onError && onError(new Error(error))
     } else if (size) {
       this.setState({ size })
