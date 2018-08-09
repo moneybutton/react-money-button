@@ -59,10 +59,7 @@ export default class MoneyButton extends Component {
     })}`
     this.setState({ iframeSource })
     // TODO: Connect remaining props
-    console.log(
-      'TODO: Connect props: hideAmount',
-      hideAmount
-    )
+    console.log('TODO: Connect props: hideAmount', hideAmount)
 
     // Useful information about iframes in react:
     // https://medium.com/@ebakhtarov/handling-of-iframes-in-react-f038be46ac24

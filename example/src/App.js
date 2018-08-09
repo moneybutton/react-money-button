@@ -50,12 +50,12 @@ export default class App extends Component {
     }
   }
 
-  handleOutputsChange = async (event) => {
+  handleOutputsChange = async event => {
     const newVale = JSON.parse(event.target.value)
-    return this.setState({outputsValue: newVale})
+    return this.setState({ outputsValue: newVale })
   }
 
-  updateParameters = async (event) => {
+  updateParameters = async event => {
     event.preventDefault()
     const {
       toValue,
@@ -70,22 +70,27 @@ export default class App extends Component {
       buttonDataValue,
       typeValue
     } = this.state
-    this.setState({
-      currentParams: {
-        toValue,
-        amountValue,
-        currencyValue,
-        labelValue,
-        hideAmountValue,
-        opReturnValue,
-        outputsValue,
-        clientIdentifierValue,
-        buttonIdValue,
-        buttonDataValue,
-        typeValue
+    this.setState(
+      {
+        currentParams: {
+          toValue,
+          amountValue,
+          currencyValue,
+          labelValue,
+          hideAmountValue,
+          opReturnValue,
+          outputsValue,
+          clientIdentifierValue,
+          buttonIdValue,
+          buttonDataValue,
+          typeValue
+        },
+        showButton: false
       },
-      showButton: false
-    }, () => { setTimeout(() => this.setState({ showButton: true }), 0) })
+      () => {
+        setTimeout(() => this.setState({ showButton: true }), 0)
+      }
+    )
   }
 
   render () {
@@ -214,7 +219,7 @@ export default class App extends Component {
 
           {/* ACtual Money Button code */}
           <p>This is how the button looks when rendered:</p>
-          {this.state.showButton &&
+          {this.state.showButton && (
             <MoneyButton
               to={currentParams.toValue}
               amount={currentParams.amountValue}
@@ -230,7 +235,7 @@ export default class App extends Component {
               onPayment={this.onPayment.bind(this)}
               onError={this.onError.bind(this)}
             />
-          }
+          )}
         </section>
       </div>
     )
