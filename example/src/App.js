@@ -214,7 +214,7 @@ export default class App extends Component {
               />
             </div>
 
-            <button>Actualizar</button>
+            <button>Update</button>
           </form>
 
           {/* ACtual Money Button code */}

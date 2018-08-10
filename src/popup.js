@@ -5,22 +5,45 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const Popup = ({ message, onClick }) => {
+const BASE_URL = process.env.REACT_APP_MONEY_BUTTON_WEBAPP_PROXY_URI
+
+const Popup = ({ message, title, type, onClick }) => {
   if (!message) return null
   return (
-    <div className='hint' onClick={() => onClick && onClick()}>
+    <div className='hint'>
       <div className='content'>
-        <span className='title'>Hey!</span>
+        <span className='title'>{title}</span>
         <span className='text'>{message}</span>
-        <div className='buttonsWrapper'>
-          <div className='button red'>Log In</div>
-          <div className='button nofill'>Register</div>
-        </div>
+        <div className='close' onClick={() => onClick && onClick()} />
+        {type === 'login' &&
+          <div className='buttonsWrapper'>
+            <a href={`${BASE_URL}/login`} target='_blank' className='button red'>Log In</a>
+            <a href={`${BASE_URL}/register`} target='_blank' className='button nofill'>Register</a>
+          </div>
+        }
+        {type === 'balance' &&
+          <div className='buttonsWrapper'>
+            <a href='#' target='_blank' className='button red'>Add Founds</a>
+          </div>
+        }
       </div>
       <style jsx>{`
+        a {
+          text-decoration: none
+        }
+
         .hint {
           min-width: 254px;
           position: relative;
+        }
+
+        .close {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 1;
         }
 
         .content {
@@ -66,6 +89,8 @@ const Popup = ({ message, onClick }) => {
           width: 100%;
           display: flex;
           justify-content: space-between;
+          position: relative;
+          z-index: 2;
         }
 
         .button {
@@ -106,7 +131,9 @@ const Popup = ({ message, onClick }) => {
 }
 
 Popup.propTypes = {
+  title: PropTypes.string,
   message: PropTypes.string,
+  type: PropTypes.string,
   onClick: PropTypes.func
 }
 

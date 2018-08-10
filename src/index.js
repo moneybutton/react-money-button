@@ -70,8 +70,8 @@ export default class MoneyButton extends Component {
     window.removeEventListener('message', this.handlePostMessage, false)
   }
 
-  showPopup (popup) {
-    this.setState({ popup })
+  showPopup (popupMessage, popupTitle, popupType) {
+    this.setState({ popupMessage, popupTitle, popupType })
   }
 
   handlePostMessage (event) {
@@ -105,10 +105,10 @@ export default class MoneyButton extends Component {
     const { error, size, payment } = event.data
     if (error) {
       if (error === 'not logged in') {
-        this.showPopup(error)
+        this.showPopup('Please login.', 'Login', 'login')
       }
       if (error === 'insufficient balance') {
-        this.showPopup(error)
+        this.showPopup('Charge more balance!', 'Not enough balance', 'balance')
       }
       onError && onError(new Error(error))
     } else if (size) {
@@ -131,7 +131,16 @@ export default class MoneyButton extends Component {
   // }
 
   render () {
-    const { iframeSource, popup, size: { width, height } } = this.state
+    const {
+      iframeSource,
+      popupMessage,
+      popupTitle,
+      popupType,
+      size: {
+        width,
+        height
+      }
+    } = this.state
     if (!iframeSource) return null
     return (
       <div
@@ -142,7 +151,7 @@ export default class MoneyButton extends Component {
           height
         }}
       >
-        <Popup message={popup} onClick={() => this.setState({ popup: null })} />
+        <Popup message={popupMessage} title={popupTitle} type={popupType} onClick={() => this.setState({ popupMessage: null })} />
         <iframe
           ref={f => (this.iframeDOMComponent = f)}
           src={iframeSource}
