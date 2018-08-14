@@ -5,7 +5,7 @@
   "author": "Yours Inc.",
   "license": "UNLICENSED",
   "private": true,
-  "repository": "https://github.com/yoursnetwork/yours",
+  "repository": "https://github.com/moneybutton/yours",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {
