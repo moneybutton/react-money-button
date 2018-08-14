@@ -23,7 +23,7 @@ const Popup = ({ message, title, type, onClick }) => {
         }
         {type === 'balance' &&
           <div className='buttonsWrapper'>
-            <a href='#' target='_blank' className='button red'>Add Founds</a>
+            <a href='#' target='_blank' className='button red'>Add Funds</a>
           </div>
         }
       </div>

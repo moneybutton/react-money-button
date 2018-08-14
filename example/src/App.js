@@ -20,8 +20,8 @@ export default class App extends Component {
       amountValue: '1000',
       currencyValue: 'BCH-SAT',
       labelValue: 'Leave a tip!',
-      hideAmountValue: false,
-      opReturnValue: 'yours.org',
+      hideAmountValue: 'false',
+      opReturnValue: 'moneybutton.com',
       outputsValue: TEST_PAYMENT_OUTPUTS,
       clientIdentifierValue: '1',
       buttonIdValue: '93434523234',
@@ -157,15 +157,6 @@ export default class App extends Component {
               />
             </div>
             <div>
-              <label>hideAmount:</label>
-              <input
-                type='text'
-                value={this.state.hideAmountValue}
-                onChange={this.handleChange('hideAmountValue')}
-                placeholder={'hideAmount'}
-              />
-            </div>
-            <div>
               <label>outputs:</label>
               <input
                 type='text'
@@ -225,7 +216,7 @@ export default class App extends Component {
               amount={currentParams.amountValue}
               currency={currentParams.currencyValue}
               label={currentParams.labelValue}
-              hideAmount={currentParams.hideAmountValue}
+              hideAmount={currentParams.hideAmountValue === 'true'}
               opReturn={currentParams.opReturnValue}
               outputs={currentParams.outputsValue}
               clientIdentifier={currentParams.clientIdentifierValue}
