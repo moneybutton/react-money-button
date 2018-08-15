@@ -127,7 +127,7 @@ export default class App extends Component {
               />
             </div>
             <div>
-              <label>currency: {currentParams.currencyValue}</label>
+              <label>currency:</label>
               <input
                 type='text'
                 value={this.state.currencyValue}
