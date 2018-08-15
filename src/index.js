@@ -14,6 +14,23 @@ const IFRAME_ORIGIN = process.env.REACT_APP_MONEY_BUTTON_WEBAPP_PROXY_URI
 const IFRAME_URL = `${IFRAME_ORIGIN}/iframe/v2`
 
 export default class MoneyButton extends Component {
+  static propTypes = {
+    to: PropTypes.string,
+    amount: PropTypes.string,
+    currency: PropTypes.string,
+    label: PropTypes.string,
+    hideAmount: PropTypes.bool,
+    opReturn: PropTypes.string,
+    outputs: PropTypes.array,
+    clientIdentifier: PropTypes.string,
+    buttonId: PropTypes.string,
+    buttonData: PropTypes.string,
+    type: PropTypes.string,
+    onPayment: PropTypes.func,
+    onError: PropTypes.func,
+    devMode: PropTypes.bool
+  }
+
   constructor (props) {
     super(props)
     this.handlePostMessage = this.handlePostMessage.bind(this)
@@ -118,18 +135,6 @@ export default class MoneyButton extends Component {
     }
   }
 
-  // shouldComponentUpdate (nextProps, nextState) {
-  //   // Guarantee the iframe won't be reloaded even if props or state changes.
-  //   // That is because we don't want to reload the page in the iframe. If for
-  //   // some reason in the future we want props or state to cause a reload, we
-  //   // will need to add some more sophisticated logic here rather than always
-  //   // returning false.
-  //   if (this.state.iframeSource) {
-  //     return false
-  //   }
-  //   return true
-  // }
-
   render () {
     const {
       iframeSource,
@@ -163,21 +168,4 @@ export default class MoneyButton extends Component {
       </div>
     )
   }
-}
-
-MoneyButton.propTypes = {
-  to: PropTypes.string,
-  amount: PropTypes.string,
-  currency: PropTypes.string,
-  label: PropTypes.string,
-  hideAmount: PropTypes.bool,
-  opReturn: PropTypes.string,
-  outputs: PropTypes.array,
-  clientIdentifier: PropTypes.string,
-  buttonId: PropTypes.string,
-  buttonData: PropTypes.string,
-  type: PropTypes.string,
-  onPayment: PropTypes.func,
-  onError: PropTypes.func,
-  devMode: PropTypes.bool
 }
