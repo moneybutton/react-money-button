@@ -50,6 +50,12 @@ export default class App extends Component {
     }
   }
 
+  handleCheckBoxChange (field) {
+    return event => {
+      this.setState({ [field]: event.target.checked })
+    }
+  }
+
   handleOutputsChange = async event => {
     const newVale = JSON.parse(event.target.value)
     return this.setState({ outputsValue: newVale })
@@ -140,10 +146,11 @@ export default class App extends Component {
             </div>
             <div>
               <label>hideAmount:</label>
+
               <input
-                type='text'
-                value={this.state.hideAmountValue}
-                onChange={this.handleChange('hideAmountValue')}
+                type='checkbox'
+                checked={this.state.hideAmountValue}
+                onChange={this.handleCheckBoxChange('hideAmountValue')}
                 placeholder={'hideAmount'}
               />
             </div>
@@ -158,7 +165,9 @@ export default class App extends Component {
             </div>
             <div>
               <label>outputs:</label>
-              <input
+              <textarea
+                cols='40'
+                rows='5'
                 type='text'
                 value={JSON.stringify(this.state.outputsValue)}
                 onChange={this.handleOutputsChange}
@@ -197,12 +206,11 @@ export default class App extends Component {
 
             <div>
               <label>type:</label>
-              <input
-                type='text'
-                value={this.state.typeValue}
-                onChange={this.handleChange('typeValue')}
-                placeholder={'soy un placeholder'}
-              />
+
+              <select value={this.state.typeValue} onChange={this.handleChange('typeValue')}>
+                <option vale='tip'>tip</option>
+                <option vale='buy'>buy</option>
+              </select>
             </div>
 
             <button>Update</button>
