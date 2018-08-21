@@ -17,15 +17,15 @@ export default class App extends Component {
     super(props)
     const initialState = {
       toValue: '5',
-      amountValue: '1000',
-      currencyValue: 'BCH-SAT',
+      amountValue: '0.1',
+      currencyValue: 'USD',
       labelValue: 'Leave a tip!',
       hideAmountValue: 'false',
       opReturnValue: 'moneybutton.com',
       outputsValue: TEST_PAYMENT_OUTPUTS,
-      clientIdentifierValue: '1',
+      clientIdentifierValue: 'some public client identifier',
       buttonIdValue: '93434523234',
-      buttonDataValue: 'somedata',
+      buttonDataValue: JSON.stringify({website: 'www.moneybutton.com', category: 'Awesomeness', description: 'cool platform', owner: 'Money Button'}),
       typeValue: 'tip'
     }
 
