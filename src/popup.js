@@ -5,7 +5,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const BASE_URL = process.env.REACT_APP_MONEY_BUTTON_WEBAPP_PROXY_URI
+const BASE_URL = process.env.MONEY_BUTTON_WEBAPP_PROXY_URI
 
 const Popup = ({ message, title, type, onClick }) => {
   if (!message) return null

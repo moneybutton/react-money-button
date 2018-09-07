@@ -2,6 +2,7 @@ import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
 import external from 'rollup-plugin-peer-deps-external'
 import postcss from 'rollup-plugin-postcss'
+import replace from 'rollup-plugin-replace'
 import resolve from 'rollup-plugin-node-resolve'
 import url from 'rollup-plugin-url'
 
@@ -22,6 +23,7 @@ export default {
     }
   ],
   plugins: [
+    replace(getReplacements()),
     external(),
     postcss({
       modules: true
@@ -33,4 +35,12 @@ export default {
     resolve(),
     commonjs()
   ]
+}
+
+function getReplacements () {
+  const replacements = {}
+  for (const key in process.env) {
+    replacements[`process.env.${key}`] = JSON.stringify(process.env[key])
+  }
+  return replacements
 }

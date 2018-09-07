@@ -9,7 +9,7 @@ import React, { Component } from 'react'
 
 import './styles.css'
 
-const IFRAME_ORIGIN = process.env.REACT_APP_MONEY_BUTTON_WEBAPP_PROXY_URI
+const IFRAME_ORIGIN = process.env.MONEY_BUTTON_WEBAPP_PROXY_URI
 
 const IFRAME_URL = `${IFRAME_ORIGIN}/iframe/v2`
 

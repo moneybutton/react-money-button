@@ -19,6 +19,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "dev":
-      "REACT_APP_ENV=dev REACT_APP_MONEY_BUTTON_WEBAPP_PROXY_URI=$MONEY_BUTTON_WEBAPP_PROXY_URI BROWSER=none yarn start"
+      "REACT_APP_ENV=dev BROWSER=none yarn start"
   }
 }
