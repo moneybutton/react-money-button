@@ -6,9 +6,9 @@ const TEST_ADDRESS = 'bchtest:qrkmjmfamfdqs5qvadkyrz72v42jk99pvspv4cepp3'
 const TEST_AMOUNT_SATOSHIS = 1000
 const TEST_PAYMENT_OUTPUTS = [
   {
-    type: 'address',
+    type: 'ADDRESS',
     address: TEST_ADDRESS,
-    amountSatoshis: TEST_AMOUNT_SATOSHIS
+    satoshis: TEST_AMOUNT_SATOSHIS
   }
 ]
 
@@ -22,7 +22,7 @@ export default class App extends Component {
       labelValue: 'Leave a tip!',
       hideAmountValue: 'false',
       opReturnValue: 'moneybutton.com',
-      outputsValue: TEST_PAYMENT_OUTPUTS,
+      outputsValue: JSON.stringify(TEST_PAYMENT_OUTPUTS),
       clientIdentifierValue: 'some public client identifier',
       buttonIdValue: '93434523234',
       buttonDataValue: JSON.stringify({website: 'www.moneybutton.com', category: 'Awesomeness', description: 'cool platform', owner: 'Money Button'}),
@@ -57,8 +57,7 @@ export default class App extends Component {
   }
 
   handleOutputsChange = async event => {
-    const newVale = JSON.parse(event.target.value)
-    return this.setState({ outputsValue: newVale })
+    return this.setState({ outputsValue: event.target.value })
   }
 
   updateParameters = async event => {
@@ -101,6 +100,12 @@ export default class App extends Component {
 
   render () {
     const currentParams = this.state.currentParams
+    let outputsValue
+    try {
+      outputsValue = JSON.parse(currentParams.outputsValue)
+    } catch (err) {
+      outputsValue = []
+    }
     return (
       <div>
         <header>
@@ -169,7 +174,7 @@ export default class App extends Component {
                 cols='40'
                 rows='5'
                 type='text'
-                value={JSON.stringify(this.state.outputsValue)}
+                value={this.state.outputsValue}
                 onChange={this.handleOutputsChange}
                 placeholder={'ouptuts'}
               />
@@ -226,7 +231,7 @@ export default class App extends Component {
               label={currentParams.labelValue}
               hideAmount={currentParams.hideAmountValue === 'true'}
               opReturn={currentParams.opReturnValue}
-              outputs={currentParams.outputsValue}
+              outputs={outputsValue}
               clientIdentifier={currentParams.clientIdentifierValue}
               buttonId={currentParams.buttonIdValue}
               buttonData={currentParams.buttonDataValue}

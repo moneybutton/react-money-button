@@ -67,7 +67,7 @@ export default class MoneyButton extends Component {
       lbl: label,
       hamt: hideAmount,
       opd: opReturn,
-      outputs: JSON.stringify(outputs),
+      os: JSON.stringify(outputs),
       cid: clientIdentifier,
       bid: buttonId,
       bdt: buttonData,
