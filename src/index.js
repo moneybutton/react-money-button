@@ -125,7 +125,7 @@ export default class MoneyButton extends Component {
         this.showPopup('Please login.', 'Login', 'login')
       }
       if (error === 'insufficient balance') {
-        this.showPopup('You do not have enough funds.', 'Low balance', 'balance')
+        this.showPopup('You do not have enough money.', 'Low balance', 'balance')
       }
       onError && onError(new Error(error))
     } else if (size) {
