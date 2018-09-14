@@ -10,7 +10,7 @@ const BASE_URL = process.env.MONEY_BUTTON_WEBAPP_PROXY_URI
 const Popup = ({ message, title, type, onClick }) => {
   if (!message) return null
   return (
-    <div className='hint'>
+    <div className='mb-hint'>
       <div className='content'>
         <span className='title'>{title}</span>
         <span className='text'>{message}</span>
@@ -28,16 +28,17 @@ const Popup = ({ message, title, type, onClick }) => {
         }
       </div>
       <style jsx>{`
-        a {
-          text-decoration: none
-        }
 
-        .hint {
+        .mb-hint {
           min-width: 254px;
           position: relative;
         }
 
-        .close {
+        .mb-hint a {
+          text-decoration: none
+        }
+
+        .mb-hint .close {
           position: absolute;
           top: 0;
           left: 0;
@@ -46,7 +47,7 @@ const Popup = ({ message, title, type, onClick }) => {
           z-index: 1;
         }
 
-        .content {
+        .mb-hint .content {
           color: white;
           background-color: #191927;
           padding: 30px;
@@ -62,7 +63,7 @@ const Popup = ({ message, title, type, onClick }) => {
           box-sizing: border-box;
         }
 
-        .content:before {
+        .mb-hint .content:before {
           content: '';
           width: 0;
           height: 0;
@@ -74,18 +75,18 @@ const Popup = ({ message, title, type, onClick }) => {
           left: calc(50% - 10px / 2);
         }
 
-        .title {
+        .mb-hint .title {
           font-size: 20px;
           font-weight: bold;
           margin-bottom: 10px;
         }
 
-        .text {
+        .mb-hint .text {
           font-size: 14px;
           margin-bottom: 20px;
         }
 
-        .buttonsWrapper {
+        .mb-hint .buttonsWrapper {
           width: 100%;
           display: flex;
           justify-content: space-between;
@@ -93,7 +94,7 @@ const Popup = ({ message, title, type, onClick }) => {
           z-index: 2;
         }
 
-        .button {
+        .mb-hint .button {
           color: white;
           font-size: 12px;
           font-weight: bold;
@@ -109,19 +110,19 @@ const Popup = ({ message, title, type, onClick }) => {
           cursor: pointer;
         }
 
-        .button.red {
+        .mb-hint .button.red {
           background-color: #e54d3f;
         }
 
-        .button.red:hover {
+        .mb-hint .button.red:hover {
           background-color: #ce4134;
         }
 
-        .button.nofill {
+        .mb-hint .button.nofill {
           border: 1px solid #fff;
         }
 
-        .button.nofill:hover {
+        .mb-hint .button.nofill:hover {
           color: #191927;
           background-color: white;
         }
