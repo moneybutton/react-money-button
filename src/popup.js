@@ -23,7 +23,7 @@ const Popup = ({ message, title, type, onClick }) => {
         }
         {type === 'balance' &&
           <div className='buttonsWrapper'>
-            <a href='#' target='_blank' className='button red'>Add Money</a>
+            <a href='#' target='_blank' className='button red add'>Add Money</a>
           </div>
         }
       </div>
@@ -61,6 +61,7 @@ const Popup = ({ message, title, type, onClick }) => {
           align-content: center;
           align-items: flex-start;
           box-sizing: border-box;
+          min-width: 260px;
         }
 
         .mb-hint .content:before {
@@ -108,6 +109,10 @@ const Popup = ({ message, title, type, onClick }) => {
           justify-content: center;
           transition: all 250ms ease-out;
           cursor: pointer;
+        }
+
+        .mb-hint .button.add {
+          width: auto;
         }
 
         .mb-hint .button.red {
