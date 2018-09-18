@@ -10,35 +10,35 @@ const BASE_URL = process.env.MONEY_BUTTON_WEBAPP_PROXY_URI
 const Popup = ({ message, title, type, onClick }) => {
   if (!message) return null
   return (
-    <div className='mb-hint'>
-      <div className='content'>
-        <span className='title'>{title}</span>
-        <span className='text'>{message}</span>
-        <div className='close' onClick={() => onClick && onClick()} />
+    <div className='hint__moneybutton'>
+      <div className='content__moneybutton'>
+        <span className='title__moneybutton'>{title}</span>
+        <span className='text__moneybutton'>{message}</span>
+        <div className='close__moneybutton' onClick={() => onClick && onClick()} />
         {type === 'login' &&
-          <div className='buttonsWrapper'>
-            <a href={`${BASE_URL}/login`} target='_blank' className='button red'>Log In</a>
-            <a href={`${BASE_URL}/register`} target='_blank' className='button nofill'>Register</a>
+          <div className='buttonsWrapper__moneybutton'>
+            <a href={`${BASE_URL}/login`} target='_blank' className='button__moneybutton red__moneybutton'>Log In</a>
+            <a href={`${BASE_URL}/register`} target='_blank' className='button__moneybutton nofill__moneybutton'>Register</a>
           </div>
         }
         {type === 'balance' &&
-          <div className='buttonsWrapper'>
-            <a href='#' target='_blank' className='button red add'>Add Money</a>
+          <div className='buttonsWrapper__moneybutton'>
+            <a href='#' target='_blank' className='button__moneybutton red__moneybutton add__moneybutton'>Add Money</a>
           </div>
         }
       </div>
       <style jsx>{`
 
-        .mb-hint {
+        .hint__moneybutton {
           min-width: 254px;
           position: relative;
         }
 
-        .mb-hint a {
+        .hint__moneybutton a {
           text-decoration: none
         }
 
-        .mb-hint .close {
+        .hint__moneybutton .close__moneybutton {
           position: absolute;
           top: 0;
           left: 0;
@@ -47,7 +47,7 @@ const Popup = ({ message, title, type, onClick }) => {
           z-index: 1;
         }
 
-        .mb-hint .content {
+        .hint__moneybutton .content__moneybutton {
           color: white;
           background-color: #191927;
           padding: 30px;
@@ -64,7 +64,7 @@ const Popup = ({ message, title, type, onClick }) => {
           min-width: 260px;
         }
 
-        .mb-hint .content:before {
+        .hint__moneybutton .content__moneybutton:before {
           content: '';
           width: 0;
           height: 0;
@@ -76,18 +76,18 @@ const Popup = ({ message, title, type, onClick }) => {
           left: calc(50% - 10px / 2);
         }
 
-        .mb-hint .title {
+        .hint__moneybutton .title__moneybutton {
           font-size: 20px;
           font-weight: bold;
           margin-bottom: 10px;
         }
 
-        .mb-hint .text {
+        .hint__moneybutton .text__moneybutton {
           font-size: 14px;
           margin-bottom: 20px;
         }
 
-        .mb-hint .buttonsWrapper {
+        .hint__moneybutton .buttonsWrapper__moneybutton {
           width: 100%;
           display: flex;
           justify-content: space-between;
@@ -95,7 +95,7 @@ const Popup = ({ message, title, type, onClick }) => {
           z-index: 2;
         }
 
-        .mb-hint .button {
+        .hint__moneybutton .button__moneybutton {
           color: white;
           font-size: 12px;
           font-weight: bold;
@@ -111,23 +111,23 @@ const Popup = ({ message, title, type, onClick }) => {
           cursor: pointer;
         }
 
-        .mb-hint .button.add {
+        .hint__moneybutton .button__moneybutton.add__moneybutton {
           width: auto;
         }
 
-        .mb-hint .button.red {
+        .hint__moneybutton .button__moneybutton.red__moneybutton {
           background-color: #e54d3f;
         }
 
-        .mb-hint .button.red:hover {
+        .hint__moneybutton .button__moneybutton.red__moneybutton:hover {
           background-color: #ce4134;
         }
 
-        .mb-hint .button.nofill {
+        .hint__moneybutton .button__moneybutton.nofill__moneybutton {
           border: 1px solid #fff;
         }
 
-        .mb-hint .button.nofill:hover {
+        .hint__moneybutton .button__moneybutton.nofill__moneybutton:hover {
           color: #191927;
           background-color: white;
         }
