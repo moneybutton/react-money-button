@@ -2,15 +2,15 @@ import MoneyButton from '@moneybutton/react-money-button'
 import React, { Component } from 'react'
 
 // Private key: KwfHwGrVWomkSAgmsQCt4XeG8JSjzMCc2goyeq9FYdLRSLE3kcCo
-const TEST_ADDRESS = 'bchtest:qrkmjmfamfdqs5qvadkyrz72v42jk99pvspv4cepp3'
-const TEST_AMOUNT_SATOSHIS = 1000
-const TEST_PAYMENT_OUTPUTS = [
-  {
-    type: 'ADDRESS',
-    address: TEST_ADDRESS,
-    satoshis: TEST_AMOUNT_SATOSHIS
-  }
-]
+// const TEST_ADDRESS = 'bchtest:qrkmjmfamfdqs5qvadkyrz72v42jk99pvspv4cepp3'
+// const TEST_AMOUNT_SATOSHIS = 1000
+// const TEST_PAYMENT_OUTPUTS = [
+//   {
+//     type: 'ADDRESS',
+//     address: TEST_ADDRESS,
+//     satoshis: TEST_AMOUNT_SATOSHIS
+//   }
+// ]
 
 export default class App extends Component {
   constructor (props) {
@@ -22,7 +22,7 @@ export default class App extends Component {
       labelValue: 'Leave a tip!',
       hideAmountValue: 'false',
       opReturnValue: 'moneybutton.com',
-      outputsValue: JSON.stringify(TEST_PAYMENT_OUTPUTS),
+      outputsValue: JSON.stringify([]),
       clientIdentifierValue: 'some public client identifier',
       buttonIdValue: '93434523234',
       buttonDataValue: JSON.stringify({website: 'www.moneybutton.com', category: 'Awesomeness', description: 'cool platform', owner: 'Money Button'}),
