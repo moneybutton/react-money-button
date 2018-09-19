@@ -1,11 +1,10 @@
 {
-  "name": "react-money-button",
-  "version": "0.1.0",
+  "name": "@moneybutton/react-money-button",
+  "version": "0.1.1",
   "description": "Money Button - React Component",
   "author": "Yours Inc.",
-  "license": "UNLICENSED",
-  "private": true,
-  "repository": "https://github.com/moneybutton/yours",
+  "license": "MIT",
+  "repository": "https://github.com/moneybutton/react-money-button",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {
@@ -17,7 +16,7 @@
     "build:dev": "NODE_ENV=dev dotenv -e ../../.env.dev -- yarn build",
     "build:prod": "NODE_ENV=production dotenv -e ../../.env.prod -- yarn build",
     "build:watch": "nodemon -w package.json -w src/ -x yarn build",
-    "prepublish": "npm run build",
+    "prepublish": "npm run build:prod",
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build",
     "dev":

@@ -1,4 +1,4 @@
-import MoneyButton from 'react-money-button'
+import MoneyButton from '@moneybutton/react-money-button'
 import React, { Component } from 'react'
 
 // Private key: KwfHwGrVWomkSAgmsQCt4XeG8JSjzMCc2goyeq9FYdLRSLE3kcCo
