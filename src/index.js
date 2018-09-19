@@ -122,10 +122,10 @@ export default class MoneyButton extends Component {
     const { error, size, payment } = event.data
     if (error) {
       if (error === 'not logged in') {
-        this.showPopup('Please login.', 'Login', 'login')
+        this.showPopup(`We believe in sound digital money for everyone in the world. Join Money Button to make this payment.`, 'Money Button', 'login')
       }
       if (error === 'insufficient balance') {
-        this.showPopup('You do not have enough money.', 'Low balance', 'balance')
+        this.showPopup('Your balance is too low to make this payment.', 'Low Balance', 'balance')
       }
       onError && onError(new Error(error))
     } else if (size) {

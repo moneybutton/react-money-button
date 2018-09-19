@@ -17,8 +17,8 @@ const Popup = ({ message, title, type, onClick }) => {
         <div className='close__moneybutton' onClick={() => onClick && onClick()} />
         {type === 'login' &&
           <div className='buttonsWrapper__moneybutton'>
-            <a href={`${BASE_URL}/login`} target='_blank' className='button__moneybutton red__moneybutton'>Log In</a>
-            <a href={`${BASE_URL}/register`} target='_blank' className='button__moneybutton nofill__moneybutton'>Register</a>
+            <a href={`${BASE_URL}/register`} target='_blank' className='button__moneybutton red__moneybutton'>Sign Up</a>
+            <a href={`${BASE_URL}/login`} target='_blank' className='button__moneybutton nofill__moneybutton'>Log In</a>
           </div>
         }
         {type === 'balance' &&
@@ -83,6 +83,7 @@ const Popup = ({ message, title, type, onClick }) => {
         }
 
         .hint__moneybutton .text__moneybutton {
+          text-align: left;
           font-size: 14px;
           margin-bottom: 20px;
         }
