@@ -60,44 +60,6 @@ export default class App extends Component {
     return this.setState({ outputsValue: event.target.value })
   }
 
-  updateParameters = async event => {
-    event.preventDefault()
-    const {
-      toValue,
-      amountValue,
-      currencyValue,
-      labelValue,
-      hideAmountValue,
-      opReturnValue,
-      outputsValue,
-      clientIdentifierValue,
-      buttonIdValue,
-      buttonDataValue,
-      typeValue
-    } = this.state
-    this.setState(
-      {
-        currentParams: {
-          toValue,
-          amountValue,
-          currencyValue,
-          labelValue,
-          hideAmountValue,
-          opReturnValue,
-          outputsValue,
-          clientIdentifierValue,
-          buttonIdValue,
-          buttonDataValue,
-          typeValue
-        },
-        showButton: false
-      },
-      () => {
-        setTimeout(() => this.setState({ showButton: true }), 0)
-      }
-    )
-  }
-
   render () {
     const currentParams = this.state.currentParams
     let outputsValue
@@ -112,7 +74,7 @@ export default class App extends Component {
           <h1>MoneyButton Example</h1>
         </header>
         <section>
-          <form onSubmit={this.updateParameters}>
+          <form>
             <div>
               <label>to:</label>
               <input
@@ -217,25 +179,23 @@ export default class App extends Component {
                 <option vale='buy'>buy</option>
               </select>
             </div>
-
-            <button>Update</button>
           </form>
 
           {/* ACtual Money Button code */}
           <p>This is how the button looks when rendered:</p>
           {this.state.showButton && (
             <MoneyButton
-              to={currentParams.toValue}
-              amount={currentParams.amountValue}
-              currency={currentParams.currencyValue}
-              label={currentParams.labelValue}
-              hideAmount={currentParams.hideAmountValue === 'true'}
-              opReturn={currentParams.opReturnValue}
+              to={this.state.toValue}
+              amount={this.state.amountValue}
+              currency={this.state.currencyValue}
+              label={this.state.labelValue}
+              hideAmount={this.state.hideAmountValue === 'true'}
+              opReturn={this.state.opReturnValue}
               outputs={outputsValue}
-              clientIdentifier={currentParams.clientIdentifierValue}
-              buttonId={currentParams.buttonIdValue}
-              buttonData={currentParams.buttonDataValue}
-              type={currentParams.typeValue}
+              clientIdentifier={this.state.clientIdentifierValue}
+              buttonId={this.state.buttonIdValue}
+              buttonData={this.state.buttonDataValue}
+              type={this.state.typeValue}
               onPayment={this.onPayment.bind(this)}
               onError={this.onError.bind(this)}
             />

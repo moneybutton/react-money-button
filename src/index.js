@@ -46,6 +46,14 @@ export default class MoneyButton extends Component {
   }
 
   componentDidMount () {
+    window.addEventListener('message', this.handlePostMessage, false)
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('message', this.handlePostMessage, false)
+  }
+
+  calculateIframeSrc = () => {
     const {
       to,
       amount,
@@ -74,17 +82,8 @@ export default class MoneyButton extends Component {
       t: type,
       dev: devMode
     })}`
-    this.setState({ iframeSource })
-    // TODO: Connect remaining props
-    // console.log('TODO: Connect props: hideAmount', hideAmount)
 
-    // Useful information about iframes in react:
-    // https://medium.com/@ebakhtarov/handling-of-iframes-in-react-f038be46ac24
-    window.addEventListener('message', this.handlePostMessage, false)
-  }
-
-  componentWillUnmount () {
-    window.removeEventListener('message', this.handlePostMessage, false)
+    return iframeSource
   }
 
   showPopup (popupMessage, popupTitle, popupType) {
@@ -137,7 +136,6 @@ export default class MoneyButton extends Component {
 
   render () {
     const {
-      iframeSource,
       popupMessage,
       popupTitle,
       popupType,
@@ -146,7 +144,9 @@ export default class MoneyButton extends Component {
         height
       }
     } = this.state
-    if (!iframeSource) return null
+
+    const iframeSrc = this.calculateIframeSrc()
+    if (!iframeSrc) return null
     return (
       <div
         style={{
@@ -159,7 +159,7 @@ export default class MoneyButton extends Component {
         <Popup message={popupMessage} title={popupTitle} type={popupType} onClick={() => this.setState({ popupMessage: null })} />
         <iframe
           ref={f => (this.iframeDOMComponent = f)}
-          src={iframeSource}
+          src={iframeSrc}
           width={width}
           height={height}
           scrolling='no'
