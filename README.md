@@ -19,9 +19,9 @@ React Money Button is a React library that lets you integrate [Money Button][mon
 React Money Button is available on the npm registry. You can install it both via yarn and npm.
 
 ```sh
-yarn add react-money-button
+yarn add @moneybutton/react-money-button
 # or
-npm install react-money-button
+npm install @moneybutton/react-money-button
 ```
 
 ## Getting started
