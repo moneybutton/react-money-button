@@ -118,13 +118,16 @@ export default class MoneyButton extends Component {
     }
     // console.log(`react-money-button: event.data:`, event.data)
     const { onError, onPayment } = this.props
-    const { error, size, payment } = event.data
+    const { error, size, payment, message } = event.data
     if (error) {
       if (error === 'not logged in') {
         this.showPopup(`We believe in sound digital money for everyone in the world. Join Money Button to make this payment.`, 'Money Button', 'login')
       }
       if (error === 'insufficient balance') {
         this.showPopup('Your balance is too low to make this payment.', 'Low Balance', 'balance')
+      }
+      if (error === 'compatibility') {
+        this.showPopup(message, 'Compatibility', 'compatibility')
       }
       onError && onError(new Error(error))
     } else if (size) {
