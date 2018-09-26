@@ -129,6 +129,9 @@ export default class MoneyButton extends Component {
       if (error === 'compatibility') {
         this.showPopup(message, 'Compatibility', 'compatibility')
       }
+      if (error === 'safari privacy') {
+        this.showPopup('We believe in sound digital money for everyone in the world. Enable Money Button on Safari to make this payment.', 'Money Button', 'safari privacy')
+      }
       onError && onError(new Error(error))
     } else if (size) {
       this.setState({ size })

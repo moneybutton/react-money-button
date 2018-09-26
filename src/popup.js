@@ -17,13 +17,18 @@ const Popup = ({ message, title, type, onClick }) => {
         <div className='close__moneybutton' onClick={() => onClick && onClick()} />
         {type === 'login' &&
           <div className='buttonsWrapper__moneybutton'>
-            <a href={`${BASE_URL}/register`} target='_blank' className='button__moneybutton red__moneybutton'>Sign Up</a>
-            <a href={`${BASE_URL}/login`} target='_blank' className='button__moneybutton nofill__moneybutton'>Log In</a>
+            <a href={`${BASE_URL}/register`} target='_blank' rel='noopener noreferrer' className='button__moneybutton red__moneybutton'>Sign Up</a>
+            <a href={`${BASE_URL}/login`} target='_blank' rel='noopener noreferrer' className='button__moneybutton nofill__moneybutton'>Log In</a>
           </div>
         }
         {type === 'balance' &&
           <div className='buttonsWrapper__moneybutton'>
-            <a href='#' target='_blank' className='button__moneybutton red__moneybutton add__moneybutton'>Add Money</a>
+            <a href='#' target='_blank' rel='noopener noreferrer' className='button__moneybutton red__moneybutton add__moneybutton'>Add Money</a>
+          </div>
+        }
+        {type === 'safari privacy' &&
+          <div className='buttonsWrapper__moneybutton'>
+            <a href='https://blog.moneybutton.com/2018/09/24/how-to-enable-money-button-on-safari-and-ios/' target='_blank' rel='noopener noreferrer' className='button__moneybutton red__moneybutton add__moneybutton'>Enable</a>
           </div>
         }
       </div>
