@@ -7,32 +7,70 @@ import React from 'react'
 
 const BASE_URL = process.env.MONEY_BUTTON_WEBAPP_PROXY_URI
 
-const Popup = ({ message, title, type, onClick }) => {
-  if (!message) return null
-  return (
-    <div className='hint__moneybutton'>
-      <div className='content__moneybutton'>
-        <span className='title__moneybutton'>{title}</span>
-        <span className='text__moneybutton'>{message}</span>
-        <div className='close__moneybutton' onClick={() => onClick && onClick()} />
-        {type === 'login' &&
-          <div className='buttonsWrapper__moneybutton'>
-            <a href={`${BASE_URL}/register`} target='_blank' rel='noopener noreferrer' className='button__moneybutton red__moneybutton'>Sign Up</a>
-            <a href={`${BASE_URL}/login`} target='_blank' rel='noopener noreferrer' className='button__moneybutton nofill__moneybutton'>Log In</a>
+class Popup extends React.Component {
+  static propTypes = {
+    title: PropTypes.string,
+    message: PropTypes.string,
+    type: PropTypes.string,
+    onClick: PropTypes.func.isRequired
+  }
+  componentDidMount () {
+    document.addEventListener('mousedown', this.handleClickOutside)
+  }
+
+  componentWillUnmount () {
+    document.removeEventListener('mousedown', this.handleClickOutside)
+  }
+
+  /**
+  * Set the wrapper ref
+  */
+  setWrapperRef = (node) => {
+    this.wrapperRef = node
+  }
+
+  /**
+   * Alert if clicked on outside of element
+   */
+  handleClickOutside = (event) => {
+    const { onClick } = this.props
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      onClick()
+    }
+  }
+
+  render () {
+    const { message, title, type } = this.props
+
+    if (!message) return null
+    return (
+      <div>
+        <div className='blur-background__moneybutton' />
+
+        <div className='hint__moneybutton' ref={this.setWrapperRef}>
+          <div className='content__moneybutton'>
+            <span className='title__moneybutton'>{title}</span>
+            <span className='text__moneybutton'>{message}</span>
+            <div className='close__moneybutton' />
+            {type === 'login' &&
+              <div className='buttonsWrapper__moneybutton'>
+                <a href={`${BASE_URL}/register`} target='_blank' rel='noopener noreferrer' className='button__moneybutton red__moneybutton'>Sign Up</a>
+                <a href={`${BASE_URL}/login`} target='_blank' rel='noopener noreferrer' className='button__moneybutton nofill__moneybutton'>Log In</a>
+              </div>
+            }
+            {type === 'balance' &&
+              <div className='buttonsWrapper__moneybutton'>
+                <a href='#' target='_blank' rel='noopener noreferrer' className='button__moneybutton red__moneybutton add__moneybutton'>Add Money</a>
+              </div>
+            }
+            {type === 'safari privacy' &&
+              <div className='buttonsWrapper__moneybutton'>
+                <a href='https://blog.moneybutton.com/2018/09/24/how-to-enable-money-button-on-safari-and-ios/' target='_blank' rel='noopener noreferrer' className='button__moneybutton red__moneybutton add__moneybutton'>Enable</a>
+              </div>
+            }
           </div>
-        }
-        {type === 'balance' &&
-          <div className='buttonsWrapper__moneybutton'>
-            <a href='#' target='_blank' rel='noopener noreferrer' className='button__moneybutton red__moneybutton add__moneybutton'>Add Money</a>
-          </div>
-        }
-        {type === 'safari privacy' &&
-          <div className='buttonsWrapper__moneybutton'>
-            <a href='https://blog.moneybutton.com/2018/09/24/how-to-enable-money-button-on-safari-and-ios/' target='_blank' rel='noopener noreferrer' className='button__moneybutton red__moneybutton add__moneybutton'>Enable</a>
-          </div>
-        }
-      </div>
-      <style jsx>{`
+        </div>
+        <style jsx>{`
 
         .hint__moneybutton {
           min-width: 254px;
@@ -52,33 +90,31 @@ const Popup = ({ message, title, type, onClick }) => {
           z-index: 1;
         }
 
+        .blur-background__moneybutton {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background-color: rgba(255, 255, 255, 0.55);
+        }
+
         .hint__moneybutton .content__moneybutton {
           color: white;
           background-color: #191927;
           padding: 30px;
           border-radius: 10px;
-          position: absolute;
+          position: fixed;
           bottom: 19px;
-          left: 0;
-          right: 0;
+          bottom: 10px;
+          right: 10px;
           display: flex;
           flex-direction: column;
           align-content: center;
           align-items: flex-start;
           box-sizing: border-box;
           min-width: 260px;
-        }
-
-        .hint__moneybutton .content__moneybutton:before {
-          content: '';
-          width: 0;
-          height: 0;
-          border-left: 10px solid transparent;
-          border-right: 10px solid transparent;
-          border-top: 10px solid #191927;
-          position: absolute;
-          bottom: -10px;
-          left: calc(50% - 10px / 2);
+          max-width: 350px;
         }
 
         .hint__moneybutton .title__moneybutton {
@@ -138,15 +174,10 @@ const Popup = ({ message, title, type, onClick }) => {
           background-color: white;
         }
       `}</style>
-    </div>
-  )
-}
+      </div>
 
-Popup.propTypes = {
-  title: PropTypes.string,
-  message: PropTypes.string,
-  type: PropTypes.string,
-  onClick: PropTypes.func
+    )
+  }
 }
 
 export default Popup
