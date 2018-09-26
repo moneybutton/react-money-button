@@ -184,21 +184,23 @@ export default class App extends Component {
           {/* ACtual Money Button code */}
           <p>This is how the button looks when rendered:</p>
           {this.state.showButton && (
-            <MoneyButton
-              to={this.state.toValue}
-              amount={this.state.amountValue}
-              currency={this.state.currencyValue}
-              label={this.state.labelValue}
-              hideAmount={this.state.hideAmountValue === 'true'}
-              opReturn={this.state.opReturnValue}
-              outputs={outputsValue}
-              clientIdentifier={this.state.clientIdentifierValue}
-              buttonId={this.state.buttonIdValue}
-              buttonData={this.state.buttonDataValue}
-              type={this.state.typeValue}
-              onPayment={this.onPayment.bind(this)}
-              onError={this.onError.bind(this)}
-            />
+            <div style={{transform: 'translateY(0)'}}>
+              <MoneyButton
+                to={this.state.toValue}
+                amount={this.state.amountValue}
+                currency={this.state.currencyValue}
+                label={this.state.labelValue}
+                hideAmount={this.state.hideAmountValue === 'true'}
+                opReturn={this.state.opReturnValue}
+                outputs={outputsValue}
+                clientIdentifier={this.state.clientIdentifierValue}
+                buttonId={this.state.buttonIdValue}
+                buttonData={this.state.buttonDataValue}
+                type={this.state.typeValue}
+                onPayment={this.onPayment.bind(this)}
+                onError={this.onError.bind(this)}
+              />
+            </div>
           )}
         </section>
       </div>

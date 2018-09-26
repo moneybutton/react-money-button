@@ -4,6 +4,7 @@
 
 import PropTypes from 'prop-types'
 import React from 'react'
+import ReactDOM from 'react-dom'
 
 const BASE_URL = process.env.MONEY_BUTTON_WEBAPP_PROXY_URI
 
@@ -14,12 +15,20 @@ class Popup extends React.Component {
     type: PropTypes.string,
     onClick: PropTypes.func.isRequired
   }
+
+  constructor (props) {
+    super(props)
+    this.el = document.createElement('div')
+    document.body.appendChild(this.el)
+  }
+
   componentDidMount () {
     document.addEventListener('mousedown', this.handleClickOutside)
   }
 
   componentWillUnmount () {
     document.removeEventListener('mousedown', this.handleClickOutside)
+    document.body.removeChild(this.el)
   }
 
   /**
@@ -43,7 +52,7 @@ class Popup extends React.Component {
     const { message, title, type } = this.props
 
     if (!message) return null
-    return (
+    const componentToRender = (
       <div>
         <div className='blur-background__moneybutton' />
 
@@ -175,8 +184,9 @@ class Popup extends React.Component {
         }
       `}</style>
       </div>
-
     )
+    return ReactDOM.createPortal(
+      componentToRender, this.el)
   }
 }
 
