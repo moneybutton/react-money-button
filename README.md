@@ -36,7 +36,7 @@ import MoneyButton from 'react-money-button'
 class MyApp extends Component {
   render() {
     return <MoneyButton
-      to="some.friend@example.com"
+      to="<your-bitcoin-address-here>"
       amount="1"
       currency="USD"
     />

@@ -21,7 +21,7 @@ export default class App extends Component {
       currencyValue: 'USD',
       labelValue: 'Leave a tip!',
       hideAmountValue: 'false',
-      opReturnValue: 'moneybutton.com',
+      opReturn: 'moneybutton.com',
       outputsValue: JSON.stringify([]),
       clientIdentifierValue: 'some public client identifier',
       buttonIdValue: '93434523234',
@@ -125,8 +125,8 @@ export default class App extends Component {
               <label>opReturn:</label>
               <input
                 type='text'
-                value={this.state.opReturnValue}
-                onChange={this.handleChange('opReturnValue')}
+                value={this.state.opReturn}
+                onChange={this.handleChange('opReturn')}
                 placeholder={'opReturn'}
               />
             </div>
@@ -191,7 +191,7 @@ export default class App extends Component {
                 currency={this.state.currencyValue}
                 label={this.state.labelValue}
                 hideAmount={this.state.hideAmountValue === 'true'}
-                opReturn={this.state.opReturnValue}
+                opReturn={this.state.opReturn}
                 outputs={outputsValue}
                 clientIdentifier={this.state.clientIdentifierValue}
                 buttonId={this.state.buttonIdValue}
