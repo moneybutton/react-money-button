@@ -20,7 +20,6 @@ export default class App extends Component {
       amountValue: '0.1',
       currencyValue: 'USD',
       labelValue: 'Leave a tip!',
-      hideAmountValue: 'false',
       opReturn: 'moneybutton.com',
       outputsValue: JSON.stringify([]),
       clientIdentifierValue: 'some public client identifier',
@@ -112,16 +111,6 @@ export default class App extends Component {
               />
             </div>
             <div>
-              <label>hideAmount:</label>
-
-              <input
-                type='checkbox'
-                checked={this.state.hideAmountValue}
-                onChange={this.handleCheckBoxChange('hideAmountValue')}
-                placeholder={'hideAmount'}
-              />
-            </div>
-            <div>
               <label>opReturn:</label>
               <input
                 type='text'
@@ -190,7 +179,6 @@ export default class App extends Component {
                 amount={this.state.amountValue}
                 currency={this.state.currencyValue}
                 label={this.state.labelValue}
-                hideAmount={this.state.hideAmountValue === 'true'}
                 opReturn={this.state.opReturn}
                 outputs={outputsValue}
                 clientIdentifier={this.state.clientIdentifierValue}
