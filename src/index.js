@@ -132,12 +132,19 @@ export default class MoneyButton extends Component {
       if (error === 'safari privacy') {
         this.showPopup('We believe in sound digital money for everyone in the world. Enable Money Button on Safari to make this payment.', 'Money Button', 'safari privacy')
       }
-      onError && onError(new Error(error))
+      if (this.isPaymentError(error)) {
+        onError && onError(new Error(error))
+      }
     } else if (size) {
       this.setState({ size })
     } else if (payment) {
       onPayment && onPayment(payment)
     }
+  }
+
+  isPaymentError = (error) => {
+    return error === 'insufficient balance' ||
+      error === 'unexpected error'
   }
 
   render () {
