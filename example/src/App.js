@@ -35,7 +35,7 @@ export default class App extends Component {
 
   onPayment (payment) {
     console.log(
-      `react-money-button/example: You clicked Money Button and received a postMessage response: ${payment}`
+      `react-money-button/example: You clicked Money Button and received a postMessage response:`, payment
     )
   }
   onError (err) {
