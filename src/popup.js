@@ -124,6 +124,7 @@ class Popup extends React.Component {
           box-sizing: border-box;
           min-width: 260px;
           max-width: 350px;
+          font-family: 'IBM Plex Sans', sans-serif;
         }
 
         .hint__moneybutton .title__moneybutton {
@@ -182,6 +183,7 @@ class Popup extends React.Component {
           color: #191927;
           background-color: white;
         }
+        @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,700');
       `}</style>
       </div>
     )
