@@ -18,11 +18,12 @@ class Popup extends React.Component {
 
   constructor (props) {
     super(props)
-    this.el = document.createElement('div')
-    document.body.appendChild(this.el)
+    this.el = null
   }
 
   componentDidMount () {
+    this.el = document.createElement('div')
+    document.body.appendChild(this.el)
     document.addEventListener('mousedown', this.handleClickOutside)
   }
 
@@ -69,7 +70,7 @@ class Popup extends React.Component {
             }
             {type === 'balance' &&
               <div className='buttonsWrapper__moneybutton'>
-                <a href='#' target='_blank' rel='noopener noreferrer' className='button__moneybutton red__moneybutton add__moneybutton'>Add Money</a>
+                <a href={`${BASE_URL}/wallet`} target='_blank' rel='noopener noreferrer' className='button__moneybutton red__moneybutton add__moneybutton'>Add Money</a>
               </div>
             }
             {type === 'safari privacy' &&
