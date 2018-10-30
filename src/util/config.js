@@ -1,4 +1,4 @@
-import MoneyButtonConfigBuilder from 'mb-config'
+import MoneyButtonConfigBuilder from '@moneybutton/config'
 
 const config = new MoneyButtonConfigBuilder()
   .addValue('MONEY_BUTTON_WEBAPP_IFRAME_URI', process.env.MONEY_BUTTON_WEBAPP_IFRAME_URI)
