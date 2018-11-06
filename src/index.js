@@ -6,11 +6,11 @@ import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import Popup from './popup'
 import React, { Component } from 'react'
+import config from './util/config'
 
 import './styles.css'
 
-const IFRAME_ORIGIN = process.env.MONEY_BUTTON_WEBAPP_PROXY_URI
-
+const IFRAME_ORIGIN = config.get('MONEY_BUTTON_WEBAPP_PROXY_URI')
 const IFRAME_URL = `${IFRAME_ORIGIN}/iframe/v2`
 
 export default class MoneyButton extends Component {
@@ -86,10 +86,6 @@ export default class MoneyButton extends Component {
     return iframeSource
   }
 
-  showPopup (popupMessage, popupTitle, popupType) {
-    this.setState({ popupMessage, popupTitle, popupType })
-  }
-
   handlePostMessage (event) {
     if (
       !this.iframeDOMComponent ||
@@ -118,20 +114,10 @@ export default class MoneyButton extends Component {
     }
     // console.log(`react-money-button: event.data:`, event.data)
     const { onError, onPayment } = this.props
-    const { error, size, payment, message } = event.data
-    if (error) {
-      if (error === 'not logged in') {
-        this.showPopup(`We believe in sound digital money for everyone in the world. Join Money Button to make this payment.`, 'Money Button', 'login')
-      }
-      if (error === 'insufficient balance') {
-        this.showPopup('Your balance is too low to make this payment.', 'Low Balance', 'balance')
-      }
-      if (error === 'compatibility') {
-        this.showPopup(message, 'Compatibility', 'compatibility')
-      }
-      if (error === 'safari privacy') {
-        this.showPopup('We believe in sound digital money for everyone in the world. Enable Money Button on Safari to make this payment.', 'Money Button', 'safari privacy')
-      }
+    const { error, size, payment, popup } = event.data
+    if (popup) {
+      this.setState({ popup })
+    } else if (error) {
       if (this.isPaymentError(error)) {
         onError && onError(new Error(error))
       }
@@ -149,9 +135,7 @@ export default class MoneyButton extends Component {
 
   render () {
     const {
-      popupMessage,
-      popupTitle,
-      popupType,
+      popup,
       size: {
         width,
         height
@@ -169,7 +153,7 @@ export default class MoneyButton extends Component {
           height
         }}
       >
-        <Popup message={popupMessage} title={popupTitle} type={popupType} onClick={() => this.setState({ popupMessage: null })} />
+        <Popup popup={popup} onClick={() => this.setState({ popup: null })} />
         <iframe
           ref={f => (this.iframeDOMComponent = f)}
           src={iframeSrc}

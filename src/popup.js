@@ -6,13 +6,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-const BASE_URL = process.env.MONEY_BUTTON_WEBAPP_PROXY_URI
-
 class Popup extends React.Component {
   static propTypes = {
-    title: PropTypes.string,
-    message: PropTypes.string,
-    type: PropTypes.string,
+    popup: PropTypes.object,
     onClick: PropTypes.func.isRequired
   }
 
@@ -50,34 +46,21 @@ class Popup extends React.Component {
   }
 
   render () {
-    const { message, title, type } = this.props
-
-    if (!message) return null
+    const { popup } = this.props
+    if (!popup) return null
+    const { title, message, buttonText, buttonUrl, buttonText2, buttonUrl2 } = popup
     const componentToRender = (
       <div>
         <div className='blur-background__moneybutton' />
-
         <div className='hint__moneybutton' ref={this.setWrapperRef}>
           <div className='content__moneybutton'>
             <span className='title__moneybutton'>{title}</span>
             <span className='text__moneybutton'>{message}</span>
             <div className='close__moneybutton' />
-            {type === 'login' &&
-              <div className='buttonsWrapper__moneybutton'>
-                <a href={`${BASE_URL}/register`} target='_blank' rel='noopener noreferrer' className='button__moneybutton red__moneybutton'>Sign Up</a>
-                <a href={`${BASE_URL}/login`} target='_blank' rel='noopener noreferrer' className='button__moneybutton nofill__moneybutton'>Log In</a>
-              </div>
-            }
-            {type === 'balance' &&
-              <div className='buttonsWrapper__moneybutton'>
-                <a href={`${BASE_URL}/wallet`} target='_blank' rel='noopener noreferrer' className='button__moneybutton red__moneybutton add__moneybutton'>Add Money</a>
-              </div>
-            }
-            {type === 'safari privacy' &&
-              <div className='buttonsWrapper__moneybutton'>
-                <a href='https://blog.moneybutton.com/2018/09/24/how-to-enable-money-button-on-safari-and-ios/' target='_blank' rel='noopener noreferrer' className='button__moneybutton red__moneybutton add__moneybutton'>Enable</a>
-              </div>
-            }
+            <div className='buttonsWrapper__moneybutton'>
+              {!!buttonText && <a href={buttonUrl} target='_blank' rel='noopener noreferrer' className='button__moneybutton red__moneybutton'>{buttonText}</a>}
+              {!!buttonText2 && <a href={buttonUrl2} target='_blank' rel='noopener noreferrer' className='button__moneybutton nofill__moneybutton'>{buttonText2}</a>}
+            </div>
           </div>
         </div>
         <style jsx>{`
