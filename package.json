@@ -1,9 +1,12 @@
 {
   "name": "@moneybutton/react-money-button",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Money Button React Component",
   "author": "Yours Inc.",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": "https://github.com/moneybutton/react-money-button",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
