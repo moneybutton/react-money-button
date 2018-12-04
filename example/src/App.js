@@ -25,7 +25,8 @@ export default class App extends Component {
       clientIdentifierValue: 'some public client identifier',
       buttonIdValue: '93434523234',
       buttonDataValue: JSON.stringify({website: 'www.moneybutton.com', category: 'Awesomeness', description: 'cool platform', owner: 'Money Button'}),
-      typeValue: 'tip'
+      typeValue: 'tip',
+      editableValue: false
     }
 
     this.state = Object.assign({}, initialState)
@@ -51,12 +52,28 @@ export default class App extends Component {
 
   handleCheckBoxChange (field) {
     return event => {
-      this.setState({ [field]: event.target.checked })
+      return new Promise(resolve => this.setState({ [field]: event.target.checked }, resolve))
+    }
+  }
+
+  handleEditableChange = async (event) => {
+    await this.handleCheckBoxChange('editableValue')(event)
+    if (this.state.editableValue) {
+      this.setState({
+        amountValue: '',
+        outputsValue: '[]'
+      })
     }
   }
 
   handleOutputsChange = async event => {
     return this.setState({ outputsValue: event.target.value })
+  }
+
+  forceReloadButton = () => {
+    this.setState({showButton: false}, () => {
+      setTimeout(() => this.setState({showButton: true}), 10)
+    })
   }
 
   render () {
@@ -168,9 +185,16 @@ export default class App extends Component {
                 <option vale='buy'>buy</option>
               </select>
             </div>
-          </form>
 
-          {/* ACtual Money Button code */}
+            <div>
+              <label>Editable:</label>
+
+              <input type='checkbox' value={this.state.editableValue} onChange={this.handleEditableChange} />
+            </div>
+          </form>
+          <button onClick={this.forceReloadButton}>Reload</button>
+
+          {/* Actual Money Button code */}
           <p>This is how the button looks when rendered:</p>
           {this.state.showButton && (
             <div style={{transform: 'translateY(0)'}}>
@@ -178,6 +202,7 @@ export default class App extends Component {
                 to={this.state.toValue}
                 amount={this.state.amountValue}
                 currency={this.state.currencyValue}
+                editable={this.state.editableValue}
                 label={this.state.labelValue}
                 opReturn={this.state.opReturn}
                 outputs={outputsValue}

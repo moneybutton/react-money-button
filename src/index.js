@@ -17,6 +17,7 @@ export default class MoneyButton extends Component {
   static propTypes = {
     to: PropTypes.string,
     amount: PropTypes.string,
+    editable: PropTypes.bool,
     currency: PropTypes.string,
     label: PropTypes.string,
     hideAmount: PropTypes.bool,
@@ -66,7 +67,8 @@ export default class MoneyButton extends Component {
       buttonId,
       buttonData,
       type,
-      devMode
+      devMode,
+      editable
     } = this.props
     const iframeSource = `${IFRAME_URL}?${queryString.stringify({
       to,
@@ -80,7 +82,8 @@ export default class MoneyButton extends Component {
       bid: buttonId,
       bdt: buttonData,
       t: type,
-      dev: devMode
+      dev: devMode,
+      edt: editable
     })}`
 
     return iframeSource
