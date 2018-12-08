@@ -2,7 +2,7 @@ import MoneyButton from '@moneybutton/react-money-button'
 import React, { Component } from 'react'
 
 // Private key: KwfHwGrVWomkSAgmsQCt4XeG8JSjzMCc2goyeq9FYdLRSLE3kcCo
-// const TEST_ADDRESS = 'bchtest:qrkmjmfamfdqs5qvadkyrz72v42jk99pvspv4cepp3'
+// const TEST_ADDRESS = 'n3BvaC814dgr3DY7skXaKxWsrPXpJASUX5'
 // const TEST_AMOUNT_SATOSHIS = 1000
 // const TEST_PAYMENT_OUTPUTS = [
 //   {
