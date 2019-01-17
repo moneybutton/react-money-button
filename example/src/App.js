@@ -20,6 +20,7 @@ export default class App extends Component {
       amountValue: '0.1',
       currencyValue: 'USD',
       labelValue: 'Leave a tip!',
+      successMessageValue: 'Success!',
       opReturn: 'moneybutton.com',
       outputsValue: JSON.stringify([]),
       clientIdentifierValue: 'some public client identifier',
@@ -128,6 +129,15 @@ export default class App extends Component {
               />
             </div>
             <div>
+              <label>Success Message:</label>
+              <input
+                type='text'
+                value={this.state.successMessageValue}
+                onChange={this.handleChange('successMessageValue')}
+                placeholder={'Success Message'}
+              />
+            </div>
+            <div>
               <label>opReturn:</label>
               <input
                 type='text'
@@ -204,6 +214,7 @@ export default class App extends Component {
                 currency={this.state.currencyValue}
                 editable={this.state.editableValue}
                 label={this.state.labelValue}
+                successMessage={this.state.successMessageValue}
                 opReturn={this.state.opReturn}
                 outputs={outputsValue}
                 clientIdentifier={this.state.clientIdentifierValue}
