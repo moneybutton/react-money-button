@@ -27,7 +27,8 @@ export default class App extends Component {
       buttonIdValue: '93434523234',
       buttonDataValue: JSON.stringify({website: 'www.moneybutton.com', category: 'Awesomeness', description: 'cool platform', owner: 'Money Button'}),
       typeValue: 'tip',
-      editableValue: false
+      editableValue: false,
+      disabledValue: false
     }
 
     this.state = Object.assign({}, initialState)
@@ -198,8 +199,12 @@ export default class App extends Component {
 
             <div>
               <label>Editable:</label>
-
               <input type='checkbox' value={this.state.editableValue} onChange={this.handleEditableChange} />
+            </div>
+
+            <div>
+              <label>Disabled:</label>
+              <input type='checkbox' value={this.state.disabledValue} onChange={this.handleCheckBoxChange('disabledValue')} />
             </div>
           </form>
           <button onClick={this.forceReloadButton}>Reload</button>
@@ -223,6 +228,7 @@ export default class App extends Component {
                 type={this.state.typeValue}
                 onPayment={this.onPayment.bind(this)}
                 onError={this.onError.bind(this)}
+                disabled={this.state.disabledValue}
               />
             </div>
           )}

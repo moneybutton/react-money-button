@@ -69,7 +69,8 @@ export default class MoneyButton extends Component {
       buttonData,
       type,
       devMode,
-      editable
+      editable,
+      disabled
     } = this.props
     const iframeSource = `${IFRAME_URL}?${queryString.stringify({
       to,
@@ -85,7 +86,8 @@ export default class MoneyButton extends Component {
       bdt: buttonData,
       t: type,
       dev: devMode,
-      edt: editable
+      edt: editable,
+      dsbd: disabled
     })}`
 
     return iframeSource
