@@ -104,7 +104,7 @@ export default class MoneyButton extends Component {
       // console.log(
       //   `react-money-button: postMessage: wrong iframe: ${
       //     event.source
-      //   } should be ${this.iframeDOMComponent.contentWindow}`
+      //   } should b e ${this.iframeDOMComponent.contentWindow}`
       // )
       return
     }
@@ -121,15 +121,13 @@ export default class MoneyButton extends Component {
     }
     // console.log(`react-money-button: event.data:`, event.data)
     const { onError, onPayment } = this.props
-    const { error, size, payment, popup } = event.data
+    const { error, payment, popup } = event.data
     if (popup) {
       this.setState({ popup })
     } else if (error) {
       if (this.isPaymentError(error)) {
         onError && onError(new Error(error))
       }
-    } else if (size) {
-      this.setState({ size })
     } else if (payment) {
       onPayment && onPayment(payment)
     }
