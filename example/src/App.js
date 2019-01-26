@@ -62,7 +62,6 @@ export default class App extends Component {
     await this.handleCheckBoxChange('editableValue')(event)
     if (this.state.editableValue) {
       this.setState({
-        amountValue: '',
         outputsValue: '[]'
       })
     }

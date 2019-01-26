@@ -30,11 +30,33 @@ export default {
     }),
     url(),
     babel({
+      presets: [
+        [
+          '@babel/preset-env',
+          {
+            modules: false,
+            targets: {
+              node: '8'
+            }
+          }
+        ]
+      ],
+      plugins: getBabelPlugins(),
       exclude: 'node_modules/**'
     }),
     resolve(),
     commonjs()
   ]
+}
+
+function getBabelPlugins (options = {}) {
+  const plugins = [
+    '@babel/plugin-proposal-object-rest-spread'
+  ]
+  if (options.includeTransformRuntime) {
+    plugins.push('@babel/plugin-transform-runtime')
+  }
+  return plugins
 }
 
 function getReplacements () {

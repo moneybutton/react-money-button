@@ -9,6 +9,7 @@ import React, { Component } from 'react'
 import config from './util/config'
 
 import './styles.css'
+import { PostMessageClient } from '@moneybutton/postmessage-client'
 
 const IFRAME_ORIGIN = config.get('MONEY_BUTTON_WEBAPP_PROXY_URI')
 const IFRAME_URL = `${IFRAME_ORIGIN}/iframe/v2`
@@ -34,7 +35,6 @@ export default class MoneyButton extends Component {
 
   constructor (props) {
     super(props)
-    this.handlePostMessage = this.handlePostMessage.bind(this)
     this.iframeDOMComponent = null // the iframe DOM component will be set on mount
     this.state = {
       iframeSource: null,
@@ -46,15 +46,30 @@ export default class MoneyButton extends Component {
     }
   }
 
+  sendInitialAttributes = (payload, topic) => {
+    this.postMessageClient.send('initial-attributes', this.calculateButtonParameters(this.props))
+  }
+
   componentDidMount () {
-    window.addEventListener('message', this.handlePostMessage, false)
+    this.postMessageClient = new PostMessageClient(this.iframeDOMComponent.contentWindow)
+    this.postMessageClient.subscribe('ready', this.sendInitialAttributes)
+    this.postMessageClient.subscribe('payment-success', this.onPaymentSuccess)
+    this.postMessageClient.subscribe('error.insufficient-balance', this.onError)
+    this.postMessageClient.subscribe('error.unexpected-error', this.onError)
+    this.postMessageClient.subscribe('error.not-logged-in', this.onError)
+    this.postMessageClient.start()
+  }
+
+  onPaymentSuccess = (payload) => {
+    const { payment } = payload
+    this.props.onPayment && this.props.onPayment(payment)
   }
 
   componentWillUnmount () {
-    window.removeEventListener('message', this.handlePostMessage, false)
+    this.postMessageClient.finalize()
   }
 
-  calculateIframeSrc = () => {
+  calculateButtonParameters = (props) => {
     const {
       to,
       amount,
@@ -71,8 +86,9 @@ export default class MoneyButton extends Component {
       devMode,
       editable,
       disabled
-    } = this.props
-    const iframeSource = `${IFRAME_URL}?${queryString.stringify({
+    } = props
+
+    return {
       to,
       amt: amount,
       ccy: currency,
@@ -88,48 +104,27 @@ export default class MoneyButton extends Component {
       dev: devMode,
       edt: editable,
       dsbd: disabled
-    })}`
+    }
+  }
 
+  calculateIframeSrc = () => {
+    const iframeSource = `${IFRAME_URL}?${queryString.stringify({format: 'postmessage'})}`
     return iframeSource
   }
 
-  handlePostMessage (event) {
-    if (
-      !this.iframeDOMComponent ||
-      event.source !== this.iframeDOMComponent.contentWindow
-    ) {
-      // We've received a message from an iframe other than the one that we
-      // rendered. Do nothing. TODO: Remove the log in production. This is only
-      // here for debugging purposes.
-      // console.log(
-      //   `react-money-button: postMessage: wrong iframe: ${
-      //     event.source
-      //   } should b e ${this.iframeDOMComponent.contentWindow}`
-      // )
-      return
-    }
-    if (event.origin !== IFRAME_ORIGIN) {
-      // If the event somehow comes from a diferent place than the official
-      // MoneyButton domain, then perhaps the user is trying to hack the app and
-      // make it think a payment occurred when it actually did not. Ignore.
-      console.log(
-        `react-money-button: postMessage: wrong origin: ${
-          event.origin
-        } should be ${IFRAME_ORIGIN}`
-      )
-      return
-    }
-    // console.log(`react-money-button: event.data:`, event.data)
-    const { onError, onPayment } = this.props
-    const { error, payment, popup } = event.data
+  componentDidUpdate () {
+    this.postMessageClient.send('attributes-updated', this.calculateButtonParameters(this.props))
+  }
+
+  onError = (eventData) => {
+    const { onError } = this.props
+    const { error, popup } = eventData
     if (popup) {
-      this.setState({ popup })
+      this.setState({popup})
     } else if (error) {
       if (this.isPaymentError(error)) {
         onError && onError(new Error(error))
       }
-    } else if (payment) {
-      onPayment && onPayment(payment)
     }
   }
 
@@ -146,8 +141,8 @@ export default class MoneyButton extends Component {
         height
       }
     } = this.state
-
     const iframeSrc = this.calculateIframeSrc()
+    console.log('popup en render', popup)
     if (!iframeSrc) return null
     return (
       <div
