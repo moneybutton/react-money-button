@@ -36,7 +36,7 @@ export default {
           {
             modules: false,
             targets: {
-              node: '8'
+              node: '10'
             }
           }
         ]
