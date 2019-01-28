@@ -142,7 +142,6 @@ export default class MoneyButton extends Component {
       }
     } = this.state
     const iframeSrc = this.calculateIframeSrc()
-    console.log('popup en render', popup)
     if (!iframeSrc) return null
     return (
       <div
