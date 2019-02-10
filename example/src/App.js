@@ -25,7 +25,7 @@ export default class App extends Component {
       outputsValue: JSON.stringify([]),
       clientIdentifierValue: 'some public client identifier',
       buttonIdValue: '93434523234',
-      buttonDataValue: JSON.stringify({website: 'www.moneybutton.com', category: 'Awesomeness', description: 'cool platform', owner: 'Money Button'}),
+      buttonDataValue: JSON.stringify({ website: 'www.moneybutton.com', category: 'Awesomeness', description: 'cool platform', owner: 'Money Button' }),
       typeValue: 'tip',
       editableValue: false,
       disabledValue: false
@@ -72,8 +72,8 @@ export default class App extends Component {
   }
 
   forceReloadButton = () => {
-    this.setState({showButton: false}, () => {
-      setTimeout(() => this.setState({showButton: true}), 10)
+    this.setState({ showButton: false }, () => {
+      setTimeout(() => this.setState({ showButton: true }), 10)
     })
   }
 
@@ -211,7 +211,7 @@ export default class App extends Component {
           {/* Actual Money Button code */}
           <p>This is how the button looks when rendered:</p>
           {this.state.showButton && (
-            <div style={{transform: 'translateY(0)'}}>
+            <div style={{ transform: 'translateY(0)' }}>
               <MoneyButton
                 to={this.state.toValue}
                 amount={this.state.amountValue}
