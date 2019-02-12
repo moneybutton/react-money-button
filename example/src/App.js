@@ -41,6 +41,7 @@ export default class App extends Component {
       `react-money-button/example: You clicked Money Button and received a postMessage response:`, payment
     )
   }
+
   onError (err) {
     console.log('Error', err)
   }
