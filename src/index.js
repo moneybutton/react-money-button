@@ -5,6 +5,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import config from './util/config'
+import _ from 'lodash'
 
 const MONEY_BUTTON_JS_URL = config.get('MONEY_BUTTON_IFRAME_LOADER_URI')
 
@@ -72,7 +73,9 @@ export default class MoneyButton extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    this.refreshMoneyButton(nextProps)
+    if (!_.isEqual(nextProps, this.props)) {
+      this.refreshMoneyButton(nextProps)
+    }
     return false
   }
 
