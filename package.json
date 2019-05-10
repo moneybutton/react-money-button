@@ -18,7 +18,7 @@
     "build:dev": "NODE_ENV=dev dotenv -e ../../.env.dev -- yarn build",
     "build:prod": "NODE_ENV=production dotenv -e ../../.env.prod -- yarn build",
     "build:watch": "nodemon -w package.json -w src/ -x yarn build",
-    "prepublish": "npm run build:prod",
+    "prepublish": "yarn build:prod",
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build",
     "dev": "NODE_ENV=dev dotenv -e ../../.env.dev -- concurrently --names 'react-money-button,react-money-button-example' 'yarn build:watch' 'yarn dev:example'",
