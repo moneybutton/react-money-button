@@ -3,7 +3,7 @@
   "version": "0.21.9",
   "description": "Money Button React Component",
   "author": "Yours Inc.",
-  "license": "BSV",
+  "license": "Open-BSV",
   "publishConfig": {
     "access": "public"
   },
