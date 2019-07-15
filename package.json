@@ -1,6 +1,6 @@
 {
   "name": "@moneybutton/react-money-button",
-  "version": "0.23.0",
+  "version": "0.23.1",
   "description": "Money Button React Component",
   "author": "Yours Inc.",
   "license": "Open-BSV",
@@ -25,7 +25,7 @@
     "dev:example": "cd example && yarn dev"
   },
   "dependencies": {
-    "@moneybutton/postmessage-client": "^0.23.0",
+    "@moneybutton/postmessage-client": "^0.23.1",
     "create-react-library": "^2.1.0",
     "query-string": "6.1.0"
   },
