@@ -21,7 +21,7 @@
     "prepublish": "yarn build:prod",
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build",
-    "dev": "NODE_ENV=dev dotenv -e ../../.env.dev -- concurrently --names 'react-money-button,react-money-button-example' 'yarn build:watch' 'yarn dev:example'",
+    "dev": "SKIP_PREFLIGHT_CHECK=true NODE_ENV=dev dotenv -e ../../.env.dev -- concurrently --names 'react-money-button,react-money-button-example' 'yarn build:watch' 'yarn dev:example'",
     "dev:example": "cd example && yarn dev"
   },
   "dependencies": {

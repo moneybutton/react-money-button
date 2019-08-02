@@ -78,6 +78,10 @@ export default class App extends Component {
     })
   }
 
+  onLoad = () => {
+    console.log('onLoad callback is working')
+  }
+
   render () {
     const currentParams = this.state.currentParams
     let outputsValue
@@ -228,6 +232,7 @@ export default class App extends Component {
                 type={this.state.typeValue}
                 onPayment={this.onPayment.bind(this)}
                 onError={this.onError.bind(this)}
+                onLoad={this.onLoad.bind(this)}
                 disabled={this.state.disabledValue}
               />
             </div>
