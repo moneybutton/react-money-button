@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@moneybutton/postmessage-client": "^0.24.0",
-    "create-react-library": "^2.1.0",
+    "create-react-library": "^2.6.7",
     "query-string": "6.1.0"
   },
   "peerDependencies": {
