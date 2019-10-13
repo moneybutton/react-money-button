@@ -234,6 +234,13 @@ export default class App extends Component {
                 onError={this.onError.bind(this)}
                 onLoad={this.onLoad.bind(this)}
                 disabled={this.state.disabledValue}
+                cryptoOperations={[
+                  {
+                    name: 'myPaymail',
+                    method: 'paymail'
+                  }
+                ]}
+                onCryptoOperations={console.log}
               />
             </div>
           )}
