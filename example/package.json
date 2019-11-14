@@ -6,7 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "babel-loader": "8.0.4",
-    "clean-css": "4.1.11",
+    "clean-css": "4.2.1",
     "eslint-utils": "1.4.3",
     "fstream": "1.0.12",
     "js-yaml": "3.13.1",
