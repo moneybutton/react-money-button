@@ -15,13 +15,13 @@
     "pretest": "yarn lint",
     "test": "NODE_ENV=test CI=1 SKIP_PREFLIGHT_CHECK=true dotenv -e ../../.env.test -- react-scripts test --env=jsdom",
     "build": "rollup -c",
-    "build:dev": "NODE_ENV=dev dotenv -e ../../.env.dev -- yarn build",
+    "build:dev": "dotenv -e ../../.env.dev -- yarn build",
     "build:prod": "NODE_ENV=production dotenv -e ../../.env.prod -- yarn build",
     "build:watch": "nodemon -w package.json -w src/ -x yarn build",
     "prepublish": "yarn build:prod",
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build",
-    "dev": "SKIP_PREFLIGHT_CHECK=true NODE_ENV=dev dotenv -e ../../.env.dev -- concurrently --names 'react-money-button,react-money-button-example' 'yarn build:watch' 'yarn dev:example'",
+    "dev": "dotenv -e ../../.env.dev -- concurrently --names \"react-money-button,react-money-button-example\" \"yarn build:watch\" \"yarn dev:example\"",
     "dev:example": "cd example && yarn dev"
   },
   "dependencies": {
