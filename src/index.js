@@ -4,32 +4,9 @@
 
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import config from './util/config'
-
-const MONEY_BUTTON_JS_URL = config.get('MONEY_BUTTON_IFRAME_LOADER_URI')
-
-class AsyncIframeLoader {
-  constructor () {
-    this.promise = new Promise((resolve) => {
-      this._resolve = resolve
-    })
-  }
-
-  fetchScript () {
-    const aScript = document.createElement('script')
-    aScript.type = 'text/javascript'
-    aScript.src = MONEY_BUTTON_JS_URL
-    document.head.appendChild(aScript)
-    MoneyButton.loadingLibrary = true
-    aScript.onload = () => {
-      this._resolve(window.moneyButton)
-    }
-  }
-
-  async iframeLoader () {
-    return this.promise
-  }
-}
+import { MoneyButtonJs } from './money-button-js'
+export * from './AMBLoader'
+export { MoneyButtonJs }
 
 export default class MoneyButton extends Component {
   static propTypes = {
@@ -53,7 +30,7 @@ export default class MoneyButton extends Component {
     devMode: PropTypes.bool
   }
 
-  static asyncIframeLoader = new AsyncIframeLoader()
+  static asyncIframeLoader = new MoneyButtonJs()
 
   constructor (props) {
     super(props)
@@ -61,11 +38,10 @@ export default class MoneyButton extends Component {
   }
 
   iframeLoader = async () => {
-    return MoneyButton.asyncIframeLoader.iframeLoader()
+    return MoneyButton.asyncIframeLoader.load()
   }
 
   async componentDidMount () {
-    MoneyButton.asyncIframeLoader.fetchScript()
     await this.refreshMoneyButton(this.props)
   }
 
