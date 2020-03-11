@@ -2,18 +2,18 @@ import React, { useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { MoneyButtonJs } from './money-button-js'
 
-const AMBLoader = ({ amount, currency, label, clientIdentifier, onAuthorizationGiven }) => {
+const IMBLoader = ({ amount, currency, label, clientIdentifier, onPermissionGranted }) => {
   const ref = useRef()
   useEffect(() => {
     const iframeLoader = new MoneyButtonJs()
     iframeLoader.load().then(async (moneyButton) => {
-      const amb = new moneyButton.AMB(ref.current)
-      amb.render({
+      const imb = new moneyButton.IMB(ref.current)
+      imb.render({
         amount,
         currency,
         label,
         clientIdentifier,
-        onAuthorizationGiven
+        onPermissionGranted
       })
     })
   }, [])
@@ -23,11 +23,11 @@ const AMBLoader = ({ amount, currency, label, clientIdentifier, onAuthorizationG
   )
 }
 
-AMBLoader.propTypes = {
+IMBLoader.propTypes = {
   amount: PropTypes.string.isRequired,
   currency: PropTypes.string.isRequired,
   label: PropTypes.string,
-  onAuthorizationGiven: PropTypes.func.isRequired
+  onPermissionGranted: PropTypes.func.isRequired
 }
 
-export { AMBLoader }
+export { IMBLoader }
