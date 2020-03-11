@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { MoneyButtonJs } from './money-button-js'
 
-const AMBLoader = ({ amount, currency, label, onAuthorizationGiven }) => {
+const AMBLoader = ({ amount, currency, label, clientIdentifier, onAuthorizationGiven }) => {
   const ref = useRef()
   useEffect(() => {
     const iframeLoader = new MoneyButtonJs()
@@ -12,6 +12,7 @@ const AMBLoader = ({ amount, currency, label, onAuthorizationGiven }) => {
         amount,
         currency,
         label,
+        clientIdentifier,
         onAuthorizationGiven
       })
     })
