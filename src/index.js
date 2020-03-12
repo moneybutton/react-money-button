@@ -5,7 +5,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { MoneyButtonJs } from './money-button-js'
-export * from './IMBLoader'
 export { MoneyButtonJs }
 
 export default class MoneyButton extends Component {
