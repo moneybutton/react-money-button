@@ -1,25 +1,28 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { MoneyButtonJs } from './money-button-js'
 
+/**
+ * TODO: This component doesn't make any sense any more. With the new IMB api this completely
+ * no needed. It's going to be removed before launch IMB.
+ */
 const IMBLoader = ({ amount, currency, label, clientIdentifier, onPermissionGranted }) => {
-  const ref = useRef()
-  useEffect(() => {
+  const requestPermission = useCallback(() => {
     const iframeLoader = new MoneyButtonJs()
     iframeLoader.load().then(async (moneyButton) => {
-      const imb = new moneyButton.IMB(ref.current)
-      imb.render({
+      const imb = new moneyButton.IMB({
         amount,
         currency,
         label,
-        clientIdentifier,
-        onPermissionGranted
+        clientIdentifier
       })
+      await imb.askForPermission()
+      onPermissionGranted(imb)
     })
   }, [])
 
   return (
-    <div ref={ref} />
+    <button onClick={requestPermission}>Request permission</button>
   )
 }
 
