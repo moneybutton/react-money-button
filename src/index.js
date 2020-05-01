@@ -46,6 +46,9 @@ export default class MoneyButton extends Component {
 
   refreshMoneyButton = async (props) => {
     const iframeLoader = await this.iframeLoader()
+    if (!this.ref) {
+      return
+    }
     iframeLoader.render(this.ref, this.createParams(props))
   }
 
