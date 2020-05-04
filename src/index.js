@@ -3,9 +3,8 @@
  */
 
 import PropTypes from 'prop-types'
+import { loadMoneyButtonJs } from '@moneybutton/javascript-money-button'
 import React, { Component } from 'react'
-import { MoneyButtonJs } from './money-button-js'
-export { MoneyButtonJs }
 
 export default class MoneyButton extends Component {
   static propTypes = {
@@ -29,15 +28,13 @@ export default class MoneyButton extends Component {
     devMode: PropTypes.bool
   }
 
-  static asyncIframeLoader = new MoneyButtonJs()
-
   constructor (props) {
     super(props)
     this.ref = null
   }
 
   iframeLoader = async () => {
-    return MoneyButton.asyncIframeLoader.load()
+    return loadMoneyButtonJs()
   }
 
   async componentDidMount () {
