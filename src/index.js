@@ -25,7 +25,8 @@ export default class MoneyButton extends Component {
     onPayment: PropTypes.func,
     onError: PropTypes.func,
     onLoad: PropTypes.func,
-    devMode: PropTypes.bool
+    devMode: PropTypes.bool,
+    preserveOrder: PropTypes.bool
   }
 
   constructor (props) {
@@ -74,7 +75,8 @@ export default class MoneyButton extends Component {
       onLoad: props.onLoad,
       editable: props.editable,
       disabled: props.disabled,
-      devMode: props.devMode
+      devMode: props.devMode,
+      preserveOrder: props.preserveOrder
     }
   }
 
