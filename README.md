@@ -44,7 +44,7 @@ class MyApp extends Component {
 }
 ```
 
-To learn more about the library, check out the [docs](https://docs.moneybutton.com/docs/react-money-button.html).
+[//]: <> (To learn more about the library, check out the [docs](https://docs.moneybutton.com/docs/react-money-button.html).)
 
 ## License
 
