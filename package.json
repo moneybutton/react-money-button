@@ -12,7 +12,6 @@
   "module": "dist/index.es.js",
   "scripts": {
     "lint": "standard --parser=babel-eslint",
-    "pretest": "yarn lint",
     "test": "NODE_ENV=test CI=1 SKIP_PREFLIGHT_CHECK=true dotenv -e ../../.env.test -- react-scripts test --env=jsdom",
     "build": "rollup -c",
     "build:dev": "dotenv -e ../../.env.dev -- yarn build",
