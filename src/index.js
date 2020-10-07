@@ -6,6 +6,8 @@ import PropTypes from 'prop-types'
 import { loadMoneyButtonJs } from '@moneybutton/javascript-money-button'
 import React, { Component } from 'react'
 
+const MONEY_BUTTON_JS_URL = 'https://www.moneybutton.com/moneybutton.js'
+
 export default class MoneyButton extends Component {
   static propTypes = {
     to: PropTypes.string,
@@ -26,7 +28,8 @@ export default class MoneyButton extends Component {
     onError: PropTypes.func,
     onLoad: PropTypes.func,
     devMode: PropTypes.bool,
-    preserveOrder: PropTypes.bool
+    preserveOrder: PropTypes.bool,
+    mbJsUrl: PropTypes.string
   }
 
   constructor (props) {
@@ -35,7 +38,7 @@ export default class MoneyButton extends Component {
   }
 
   iframeLoader = async () => {
-    return loadMoneyButtonJs()
+    return loadMoneyButtonJs({ url: this.props.mbJsUrl || MONEY_BUTTON_JS_URL })
   }
 
   async componentDidMount () {
